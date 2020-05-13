@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>AluminiumTech.SettingsKit</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>SettingsKit</Title>
+        <Authors>AluminiumTech</Authors>
+        <Copyright>Copyright (c) AluminiumTech 2020</Copyright>
+        <PackageLicenseUrl>https://github.com/AluminiumTech/SettingsKit/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/AluminiumTech/SettingsKit</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageReleaseNotes>Initial release on Nuget</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="aluminiumtechdevkit" Version="1.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ManagementKit\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ManagementKit\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ManagementKit\**" />
+    </ItemGroup>
+
+</Project>
