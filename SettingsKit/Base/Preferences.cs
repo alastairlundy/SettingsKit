@@ -63,5 +63,10 @@ namespace AluminiumTech.SettingsKit.Base
         {
             return _preferences.Count;
         }
+
+        public Preference<TKey, TValue>[] ToArray()
+        {
+            return _preferences.ToArray();
+        }
     }
 }
