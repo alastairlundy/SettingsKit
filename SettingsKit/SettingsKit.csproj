@@ -10,15 +10,11 @@
         <PackageLicenseUrl>https://github.com/AluminiumTech/SettingsKit/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/AluminiumTech/SettingsKit</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>## Changes
-
-* Updated to AluminiumTechDevKit 1.1.0
-* Re-licensed under BSD 3 clause
-* Removed Preference base class which has been replaced by using HashMaps to represent that instead
-* Re-factored other classes to account for removal of Preference base class.
-* Re-factored other classes to use HashMapWrapper from DevKit 1.1.0</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes
+* Completed re-designed SettingsKit to fix issues preventing it's use in some circumstances.
+* Added features to PreferencesWriter to allow modification of settings files.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageVersion>1.2.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
