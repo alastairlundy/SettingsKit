@@ -27,7 +27,7 @@ using Newtonsoft.Json.Linq;
 namespace AluminiumTech.SettingsKit
 {
     /// <summary>
-    /// 
+    /// A class to read a .JSON preferences file.
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
