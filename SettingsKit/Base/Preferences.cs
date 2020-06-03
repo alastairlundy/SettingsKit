@@ -20,21 +20,21 @@ using AluminiumTech.DevKit;
 
 namespace AluminiumTech.SettingsKit.Base
 {
-    public class Preferences<TKey, TValue> : List<HashMap<TKey, TValue>>
+    public class Preferences<TKey, TValue> : List<HashMapWrapper<TKey, TValue>>
     {
 
-        public void Modify(HashMap<TKey, TValue> oldPreference, HashMap<TKey, TValue> newPreference)
+        public void Modify(HashMapWrapper<TKey, TValue> oldPreference, HashMapWrapper<TKey, TValue> newPreference)
         { 
             Insert(GetPosition(oldPreference), newPreference);
             Remove(oldPreference);
         }
         
-        public HashMap<TKey, TValue> Get(int i)
+        public HashMapWrapper<TKey, TValue> Get(int i)
         {
            return this[i];
         }
 
-        public int GetPosition(HashMap<TKey, TValue> preference)
+        public int GetPosition(HashMapWrapper<TKey, TValue> preference)
         {
             for(int i = 0; i < this.Count; i++)
             {
@@ -48,21 +48,21 @@ namespace AluminiumTech.SettingsKit.Base
         }
         
         /// <summary>
-        /// Returns the HashMap containing the Key
+        /// Returns the HashMapWrapper containing the Key
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public HashMap<TKey, TValue> GetPreferenceContainingKey(TKey key)
+        public HashMapWrapper<TKey, TValue> GetPreferenceContainingKey(TKey key)
         {
             var tuple = GetPosition(key);
             return this[tuple.Item1];
         }
 
         /// <summary>
-        /// Get the position of the Key within a list of HashMaps
+        /// Get the position of the Key within a list of HashMapWrappers
         /// Note:
-        ///     First int in Tuple is the selected HashMap in the list.
-        ///     Second int in Tuple is the position in the selected HashMap
+        ///     First int in Tuple is the selected HashMapWrapper in the list.
+        ///     Second int in Tuple is the position in the selected HashMapWrapper
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace AluminiumTech.SettingsKit.Base
             return new Tuple<int, int>(0,0);
         }
 
-        public HashMap<TKey, TValue>[] ToArray()
+        public HashMapWrapper<TKey, TValue>[] ToArray()
         {
             return this.ToArray();
         }

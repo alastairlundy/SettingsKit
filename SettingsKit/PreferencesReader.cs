@@ -17,6 +17,7 @@ using System;
 
 using System.IO;
 using System.Linq;
+
 using AluminiumTech.DevKit;
 using AluminiumTech.SettingsKit.Base;
 
@@ -28,7 +29,7 @@ namespace AluminiumTech.SettingsKit
     public class PreferencesReader<TKey, TValue>
     {
 
-        public HashMap<TKey, TValue> GetPreference(string pathToJsonFile, TKey key)
+        public HashMapWrapper<TKey, TValue> GetPreference(string pathToJsonFile, TKey key)
         { 
             var prefs = GetPreferences(pathToJsonFile);
            return prefs[(prefs.GetPosition(key).Item1)];
@@ -45,7 +46,7 @@ namespace AluminiumTech.SettingsKit
 
                 for (int i = 0; i < json.Count; i++)
                 {
-                    HashMap<TKey, TValue> deserailizedPreference = JsonConvert.DeserializeObject<HashMap<TKey, TValue>>(json[i].ToString());
+                    HashMapWrapper<TKey, TValue> deserailizedPreference = JsonConvert.DeserializeObject<HashMapWrapper<TKey, TValue>>(json[i].ToString());
                     _preferences.Add(deserailizedPreference);
                 }
             }
