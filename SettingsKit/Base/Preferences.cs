@@ -20,21 +20,37 @@ using AluminiumTech.DevKit;
 
 namespace AluminiumTech.SettingsKit.Base
 {
-    public class Preferences<TKey, TValue> : List<HashMapWrapper<TKey, TValue>>
+    public class Preferences<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
     {
 
-        public void Modify(HashMapWrapper<TKey, TValue> oldPreference, HashMapWrapper<TKey, TValue> newPreference)
+        public Dictionary<TKey, TValue> ToDictionary()
+        {
+            return ToHashMapWrapper().ToDictionary();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public HashMapWrapper<TKey, TValue> ToHashMapWrapper()
+        {
+            HashMapWrapper<TKey, TValue> hashMapWrapper = new HashMapWrapper<TKey, TValue>();
+
+            foreach (KeyValuePair<TKey, TValue> pairs in this)
+            {
+                hashMapWrapper.Put(pairs.Key, pairs.Value);
+            }
+
+            return hashMapWrapper;
+        }
+
+        public void Modify(KeyValuePair<TKey, TValue> oldPreference, KeyValuePair<TKey, TValue> newPreference)
         { 
             Insert(GetPosition(oldPreference), newPreference);
             Remove(oldPreference);
         }
-        
-        public HashMapWrapper<TKey, TValue> Get(int i)
-        {
-           return this[i];
-        }
 
-        public int GetPosition(HashMapWrapper<TKey, TValue> preference)
+        public int GetPosition(KeyValuePair<TKey, TValue> preference)
         {
             for(int i = 0; i < this.Count; i++)
             {
@@ -46,17 +62,6 @@ namespace AluminiumTech.SettingsKit.Base
 
             return 0;
         }
-        
-        /// <summary>
-        /// Returns the HashMapWrapper containing the Key
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public HashMapWrapper<TKey, TValue> GetPreferenceContainingKey(TKey key)
-        {
-            var tuple = GetPosition(key);
-            return this[tuple.Item1];
-        }
 
         /// <summary>
         /// Get the position of the Key within a list of HashMapWrappers
@@ -66,27 +71,17 @@ namespace AluminiumTech.SettingsKit.Base
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public Tuple<int, int> GetPosition(TKey key)
+        public int GetPosition(TKey key)
         {
             for (int index = 0; index < this.Count; index++)
             {
-                int index2 = 0;
-                foreach (TKey k in this[index].ToDictionary().Keys)
+                if (this[index].Equals(key))
                 {
-                    if (k.Equals(key))
-                    {
-                        return new Tuple<int, int>(index, index2);
-                    }
-                    index2++;
+                    return index;
                 }
             }
 
-            return new Tuple<int, int>(0,0);
-        }
-
-        public HashMapWrapper<TKey, TValue>[] ToArray()
-        {
-            return this.ToArray();
+            return 0;
         }
     }
 }

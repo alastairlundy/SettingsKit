@@ -14,7 +14,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 using System;
-
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -26,32 +26,72 @@ using Newtonsoft.Json.Linq;
 
 namespace AluminiumTech.SettingsKit
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     public class PreferencesReader<TKey, TValue>
     {
+        protected string _pathToJsonFile;
 
-        public HashMapWrapper<TKey, TValue> GetPreference(string pathToJsonFile, TKey key)
-        { 
-            var prefs = GetPreferences(pathToJsonFile);
-           return prefs[(prefs.GetPosition(key).Item1)];
+        public PreferencesReader(string pathToJsonFile)
+        {
+            _pathToJsonFile = pathToJsonFile;
         }
         
-        public Preferences<TKey, TValue> GetPreferences(string pathToJsonFile)
+        /// <summary>
+        /// Return the path to the json file as a string.
+        /// </summary>
+        /// <returns></returns>
+        public string GetPathToJsonFile()
         {
-            Preferences<TKey, TValue> _preferences = new Preferences<TKey, TValue>();
+            return _pathToJsonFile;
+        }
+        
+        /// <summary>
+        /// Sets the path to the json file as a string.
+        /// </summary>
+        /// <param name="pathToJsonFile"></param>
+        public void SetPathToJsonFile(string pathToJsonFile)
+        {
+            this._pathToJsonFile = pathToJsonFile;
+        }
+        
+        /// <summary>
+        /// Return an individual preference.
+        /// </summary>
+        /// <param name="pathToJsonFile"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public KeyValuePair<TKey, TValue> GetPreference(TKey key)
+        { 
+            var prefs = GetPreferences();
+           return prefs[(prefs.GetPosition(key))];
+        }
+        
+        /// <summary>
+        /// Return a list of preferences.
+        /// </summary>
+        /// <param name="pathToJsonFile"></param>
+        /// <returns></returns>
+        public Preferences<TKey, TValue> GetPreferences()
+        {
+            Preferences<TKey, TValue> preferences = new Preferences<TKey, TValue>();
 
-            using (StreamReader file = File.OpenText(pathToJsonFile))
+            using (StreamReader file = File.OpenText(_pathToJsonFile))
             using (JsonTextReader reader = new JsonTextReader(file))
             {
                 JObject json = (JObject) JToken.ReadFrom(reader);
 
                 for (int i = 0; i < json.Count; i++)
                 {
-                    HashMapWrapper<TKey, TValue> deserailizedPreference = JsonConvert.DeserializeObject<HashMapWrapper<TKey, TValue>>(json[i].ToString());
-                    _preferences.Add(deserailizedPreference);
+                    KeyValuePair<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<KeyValuePair<TKey, TValue>>(json[i].ToString());
+                    preferences.Add(deserializedPreference);
                 }
             }
 
-            return _preferences;
+            return preferences;
         }
     }
 }
