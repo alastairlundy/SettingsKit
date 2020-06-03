@@ -14,7 +14,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 using System.IO;
-
+using AluminiumTech.DevKit;
 using AluminiumTech.SettingsKit.Base;
 
 using Newtonsoft.Json;
@@ -30,7 +30,7 @@ namespace AluminiumTech.SettingsKit
         /// </summary>
         /// <param name="pathToJsonFile"></param>
         /// <param name="preference"></param>
-        public void AddPreference(string pathToJsonFile, Preference<TKey, TValue> preference)
+        public void AddPreference(string pathToJsonFile, HashMap<TKey, TValue> preference)
         {
             JsonSerializer serializer = new JsonSerializer();
             
@@ -48,9 +48,9 @@ namespace AluminiumTech.SettingsKit
         /// <param name="preferences"></param>
         public void AddPreferences(string pathToJsonFile, Preferences<TKey, TValue> preferences)
         {
-            for (int i = 0; i < preferences.Size(); i++)
+            for (int i = 0; i < preferences.Count; i++)
             {
-                Preference<TKey, TValue> preference = preferences.Get(i);
+                HashMap<TKey, TValue> preference = preferences.Get(i);
                 AddPreference(pathToJsonFile, preference);
             }
         }

@@ -17,7 +17,7 @@ using System;
 
 using System.IO;
 using System.Linq;
-
+using AluminiumTech.DevKit;
 using AluminiumTech.SettingsKit.Base;
 
 using Newtonsoft.Json;
@@ -28,10 +28,10 @@ namespace AluminiumTech.SettingsKit
     public class PreferencesReader<TKey, TValue>
     {
 
-        public Preference<TKey, TValue> GetPreference(string pathToJsonFile, TKey key)
-        {
+        public HashMap<TKey, TValue> GetPreference(string pathToJsonFile, TKey key)
+        { 
             var prefs = GetPreferences(pathToJsonFile);
-           return prefs.Get(prefs.GetPosition(key));
+           return prefs[(prefs.GetPosition(key).Item1)];
         }
         
         public Preferences<TKey, TValue> GetPreferences(string pathToJsonFile)
@@ -45,7 +45,7 @@ namespace AluminiumTech.SettingsKit
 
                 for (int i = 0; i < json.Count; i++)
                 {
-                    Preference<TKey, TValue> deserailizedPreference = JsonConvert.DeserializeObject<Preference<TKey, TValue>>(json[i].ToString());
+                    HashMap<TKey, TValue> deserailizedPreference = JsonConvert.DeserializeObject<HashMap<TKey, TValue>>(json[i].ToString());
                     _preferences.Add(deserailizedPreference);
                 }
             }
