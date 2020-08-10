@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <RootNamespace>AluminiumTech.SettingsKit</RootNamespace>
+        <RootNamespace>AluminiumTech.DevKit.SettingsKit</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>SettingsKit</Title>
         <Authors>AluminiumTech</Authors>
@@ -15,6 +15,7 @@
 * Added features to PreferencesWriter to allow modification of settings files.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageVersion>1.2.0</PackageVersion>
+        <AssemblyName>AluminiumTech.DevKit.SettingsKit</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
