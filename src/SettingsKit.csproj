@@ -6,33 +6,35 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>SettingsKit</Title>
         <Authors>AluminiumTech</Authors>
-        <Copyright>Copyright (c) AluminiumTech 2020</Copyright>
-        <PackageLicenseUrl>https://github.com/AluminiumTech/SettingsKit/blob/master/LICENSE</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/AluminiumTech/SettingsKit</RepositoryUrl>
+        <Copyright>Copyright (c) AluminiumTech 2021</Copyright>
+        <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageReleaseNotes>### Changes
-* Completed re-designed SettingsKit to fix issues preventing it's use in some circumstances.
-* Added features to PreferencesWriter to allow modification of settings files.</PackageReleaseNotes>
+* Fix outdated repo url in Nuget Package
+* Removed reliance on aluminiumtechdevkit and removed references to it
+* Removed support for exporting Preferences files to aluminiumtechdevkit's HashMapWrapper.
+* Simplified the handling of the variable responsible for the path to the json file.
+* Removed variable responsible for path to the json file in Reader class.
+* Added try/catch statements to increase robustness of code.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageVersion>1.2.0</PackageVersion>
         <AssemblyName>AluminiumTech.DevKit.SettingsKit</AssemblyName>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
+        <Version>2.0.0</Version>
+      <PackageVersion>2.0.0</PackageVersion>
+        <Product>SettingsKit</Product>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="aluminiumtechdevkit" Version="1.1.0" />
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="ManagementKit\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="ManagementKit\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="ManagementKit\**" />
+      <None Include="..\LICENSE.md">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
