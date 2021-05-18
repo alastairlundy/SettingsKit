@@ -29,6 +29,7 @@ using Newtonsoft.Json;
 
 using AluminiumTech.DevKit.SettingsKit.Base;
 
+using System;
 
 namespace AluminiumTech.DevKit.SettingsKit
 {    
@@ -39,26 +40,13 @@ namespace AluminiumTech.DevKit.SettingsKit
     /// <typeparam name="TValue"></typeparam>
     public class PreferencesWriter<TKey, TValue>
     {
-        protected string _pathToJsonFile;
-        
-        /// <summary>
-        /// Return the path to the json file as a string.
-        /// </summary>
-        /// <returns></returns>
-        public string GetPathToJsonFile()
+        public string PathToJsonFile { get; set; }
+
+        public PreferencesWriter(string pathToJsonFile)
         {
-            return _pathToJsonFile;
+            PathToJsonFile = pathToJsonFile;
         }
-        
-        /// <summary>
-        /// Sets the path to the json file as a string.
-        /// </summary>
-        /// <param name="pathToJsonFile"></param>
-        public void SetPathToJsonFile(string pathToJsonFile)
-        {
-            this._pathToJsonFile = pathToJsonFile;
-        }
-        
+
         /// <summary>
         /// Add a preference to an existing settings file or creates a new one.
         /// </summary>
@@ -66,12 +54,20 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="preference"></param>
         public void AddPreference(KeyValuePair<TKey, TValue> preference)
         {
-            JsonSerializer serializer = new JsonSerializer();
-            
-            using (StreamWriter sw = new StreamWriter(_pathToJsonFile))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            try
             {
-                serializer.Serialize(writer, preference);
+                JsonSerializer serializer = new JsonSerializer();
+
+                using (StreamWriter sw = new StreamWriter(PathToJsonFile))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    serializer.Serialize(writer, preference);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
             }
         }
         
