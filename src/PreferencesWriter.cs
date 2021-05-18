@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 AluminiumTech
+Copyright (c) 2021 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,10 +31,9 @@ using AluminiumTech.DevKit.SettingsKit.Base;
 
 using System;
 
-namespace AluminiumTech.DevKit.SettingsKit
-{    
+namespace AluminiumTech.DevKit.SettingsKit{    
     /// <summary>
-    /// A class to write or create a .JSON preferences file.
+    /// A class to write to or create a .JSON preferences file.
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>

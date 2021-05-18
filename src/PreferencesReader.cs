@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 AluminiumTech
+Copyright (c) 2021 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,10 +39,9 @@ namespace AluminiumTech.DevKit.SettingsKit
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    public class PreferencesReader<TKey, TValue>
-    {
-         public PreferencesReader()
-        {
+    public class PreferencesReader<TKey, TValue>{
+
+        public PreferencesReader(){
 
         }
 
