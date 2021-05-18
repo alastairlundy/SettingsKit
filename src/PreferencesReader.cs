@@ -67,21 +67,29 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <returns></returns>
         public Preferences<TKey, TValue> GetPreferences()
         {
-            Preferences<TKey, TValue> preferences = new Preferences<TKey, TValue>();
-
-            using (StreamReader file = File.OpenText(_pathToJsonFile))
-            using (JsonTextReader reader = new JsonTextReader(file))
+            try
             {
-                JObject json = (JObject) JToken.ReadFrom(reader);
+                Preferences<TKey, TValue> preferences = new Preferences<TKey, TValue>();
 
-                for (int i = 0; i < json.Count; i++)
+                using (StreamReader file = File.OpenText(PathToJsonFile))
+                using (JsonTextReader reader = new JsonTextReader(file))
                 {
-                    KeyValuePair<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<KeyValuePair<TKey, TValue>>(json[i].ToString());
-                    preferences.Add(deserializedPreference);
-                }
-            }
+                    JObject json = (JObject)JToken.ReadFrom(reader);
 
-            return preferences;
+                    for (int i = 0; i < json.Count; i++)
+                    {
+                        KeyValuePair<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<KeyValuePair<TKey, TValue>>(json[i].ToString());
+                        preferences.Add(deserializedPreference);
+                    }
+                }
+
+                return preferences;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
         }
     }
 }
