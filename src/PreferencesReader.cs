@@ -41,22 +41,20 @@ namespace AluminiumTech.DevKit.SettingsKit
     /// <typeparam name="TValue"></typeparam>
     public class PreferencesReader<TKey, TValue>
     {
-        public string PathToJsonFile { get; set; }
-
-        public PreferencesReader(string pathToJsonFile)
+         public PreferencesReader()
         {
-            PathToJsonFile = pathToJsonFile;
+
         }
-        
+
         /// <summary>
         /// Return an individual preference.
         /// </summary>
-        /// <param name="pathToJsonFile"></param>
+        /// <param name="PathToJsonFile"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public KeyValuePair<TKey, TValue> GetPreference(TKey key)
+        public KeyValuePair<TKey, TValue> GetPreference(string PathToJsonFile, TKey key)
         { 
-            var prefs = GetPreferences();
+            var prefs = GetPreferences(PathToJsonFile);
            return prefs[(prefs.GetPosition(key))];
         }
         
@@ -65,7 +63,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// </summary>
         /// <param name="pathToJsonFile"></param>
         /// <returns></returns>
-        public Preferences<TKey, TValue> GetPreferences()
+        public Preferences<TKey, TValue> GetPreferences(string PathToJsonFile)
         {
             try
             {

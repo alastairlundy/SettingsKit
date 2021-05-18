@@ -112,8 +112,8 @@ namespace AluminiumTech.DevKit.SettingsKit
         {
             try
             {
-                PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>(PathToJsonFile);
-                var preferences = reader.GetPreferences();
+                PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>();
+                var preferences = reader.GetPreferences(PathToJsonFile);
                 preferences.Remove(preference);
             }
             catch (Exception ex)
