@@ -31,19 +31,27 @@ namespace AluminiumTech.DevKit.SettingsKit.Base
     {
 
         /// <summary>
-        /// 
+        /// Returns preferences to a dictionary object.
         /// </summary>
         /// <returns></returns>
         public Dictionary<TKey, TValue> ToDictionary()
         {
-            Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
-
-            foreach (KeyValuePair<TKey, TValue> pairs in this)
+            try
             {
-               dictionary.Add(pairs.Key, pairs.Value);
-            }
+                Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
 
-            return dictionary;
+                foreach (KeyValuePair<TKey, TValue> pairs in this)
+                {
+                    dictionary.Add(pairs.Key, pairs.Value);
+                }
+
+                return dictionary;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
         }
 
         /// <summary>
