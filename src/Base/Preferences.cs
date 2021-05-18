@@ -29,25 +29,20 @@ namespace AluminiumTech.DevKit.SettingsKit.Base
     public class Preferences<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
     {
 
-        public Dictionary<TKey, TValue> ToDictionary()
-        {
-            return ToHashMapWrapper().ToDictionary();
-        }
-        
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public HashMapWrapper<TKey, TValue> ToHashMapWrapper()
+        public Dictionary<TKey, TValue> ToDictionary()
         {
-            HashMapWrapper<TKey, TValue> hashMapWrapper = new HashMapWrapper<TKey, TValue>();
+            Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
 
             foreach (KeyValuePair<TKey, TValue> pairs in this)
             {
-                hashMapWrapper.Put(pairs.Key, pairs.Value);
+               dictionary.Add(pairs.Key, pairs.Value);
             }
 
-            return hashMapWrapper;
+            return dictionary;
         }
 
         public void Modify(KeyValuePair<TKey, TValue> oldPreference, KeyValuePair<TKey, TValue> newPreference)
