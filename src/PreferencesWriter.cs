@@ -100,7 +100,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="newPreference"></param>
         public void UpdatePreference(KeyValuePair<TKey, TValue> oldPreference, KeyValuePair<TKey, TValue> newPreference)
         {
-           RemovePreference(oldPreference);
+            RemovePreference(oldPreference);
             AddPreference(newPreference);
         }
         
