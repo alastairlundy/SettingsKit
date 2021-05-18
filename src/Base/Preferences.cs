@@ -46,7 +46,32 @@ namespace AluminiumTech.DevKit.SettingsKit.Base
             return dictionary;
         }
 
-        public void Modify(KeyValuePair<TKey, TValue> oldPreference, KeyValuePair<TKey, TValue> newPreference)
+        /// <summary>
+        /// Modifies an existing preference and replacing it with a new one
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="newValue"></param>
+        public void Modify(TKey key, TValue newValue)
+        {
+            try
+            {
+                KeyValuePair<TKey, TValue> pair = new KeyValuePair<TKey, TValue>(key, newValue);
+
+                Replace(this[GetPosition(key)], pair);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Replaces an existing preference with a new one.
+        /// </summary>
+        /// <param name="oldPreference"></param>
+        /// <param name="newPreference"></param>
+        public void Replace(KeyValuePair<TKey, TValue> oldPreference, KeyValuePair<TKey, TValue> newPreference)
         { 
             try
             {
