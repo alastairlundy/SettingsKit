@@ -78,10 +78,18 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="preferences"></param>
         public void AddPreferences(Preferences<TKey, TValue> preferences)
         {
-            for (int i = 0; i < preferences.Count; i++)
+            try
             {
-                KeyValuePair<TKey, TValue> preference = preferences[i];
-                AddPreference(preference);
+                for (int i = 0; i < preferences.Count; i++)
+                {
+                    KeyValuePair<TKey, TValue> preference = preferences[i];
+                    AddPreference(preference);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
             }
         }
         
@@ -92,11 +100,8 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="newPreference"></param>
         public void UpdatePreference(KeyValuePair<TKey, TValue> oldPreference, KeyValuePair<TKey, TValue> newPreference)
         {
-           PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>(_pathToJsonFile);
-           var preferences = reader.GetPreferences(); 
            RemovePreference(oldPreference);
-           preferences.Add(newPreference);
-           AddPreferences(preferences);
+            AddPreference(newPreference);
         }
         
         /// <summary>
@@ -105,10 +110,17 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="preference"></param>
         public void RemovePreference(KeyValuePair<TKey, TValue> preference)
         {
-           PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>(_pathToJsonFile);
-           var preferences = reader.GetPreferences();
-           preferences.Remove(preference);
-           AddPreferences(preferences);
+            try
+            {
+                PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>(PathToJsonFile);
+                var preferences = reader.GetPreferences();
+                preferences.Remove(preference);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }        
         }
     }
 }
