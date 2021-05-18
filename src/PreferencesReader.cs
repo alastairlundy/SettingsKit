@@ -30,6 +30,8 @@ using Newtonsoft.Json.Linq;
 
 using AluminiumTech.DevKit.SettingsKit.Base;
 
+using System;
+
 namespace AluminiumTech.DevKit.SettingsKit
 {
     /// <summary>
@@ -39,29 +41,11 @@ namespace AluminiumTech.DevKit.SettingsKit
     /// <typeparam name="TValue"></typeparam>
     public class PreferencesReader<TKey, TValue>
     {
-        protected string _pathToJsonFile;
+        public string PathToJsonFile { get; set; }
 
         public PreferencesReader(string pathToJsonFile)
         {
-            _pathToJsonFile = pathToJsonFile;
-        }
-        
-        /// <summary>
-        /// Return the path to the json file as a string.
-        /// </summary>
-        /// <returns></returns>
-        public string GetPathToJsonFile()
-        {
-            return _pathToJsonFile;
-        }
-        
-        /// <summary>
-        /// Sets the path to the json file as a string.
-        /// </summary>
-        /// <param name="pathToJsonFile"></param>
-        public void SetPathToJsonFile(string pathToJsonFile)
-        {
-            this._pathToJsonFile = pathToJsonFile;
+            PathToJsonFile = pathToJsonFile;
         }
         
         /// <summary>
