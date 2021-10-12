@@ -9,12 +9,14 @@
         <Copyright>Copyright (c) AluminiumTech 2021</Copyright>
         <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes
+* Fixed some issues in ``PreferencesWriter``
+* Fixed some issues in ``Preferences``</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
-        <Version>2.0.0</Version>
+        <Version>2.0.1</Version>
       <PackageVersion>2.0.1</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
