@@ -129,7 +129,7 @@ namespace AluminiumTech.DevKit.SettingsKit.Base
             {
                 for (int index = 0; index < this.Count; index++)
                 {
-                    if (this[index].Equals(key))
+                    if (this[index].Key.Equals(key))
                     {
                         return index;
                     }
