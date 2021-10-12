@@ -24,13 +24,12 @@ SOFTWARE.
 
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using AluminiumTech.DevKit.SettingsKit.Base;
-
-using System;
 
 namespace AluminiumTech.DevKit.SettingsKit
 {
@@ -48,12 +47,12 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <summary>
         /// Return an individual preference.
         /// </summary>
-        /// <param name="PathToJsonFile"></param>
+        /// <param name="pathToJsonFile"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public KeyValuePair<TKey, TValue> GetPreference(string PathToJsonFile, TKey key)
+        public KeyValuePair<TKey, TValue> GetPreference(string pathToJsonFile, TKey key)
         { 
-            var prefs = GetPreferences(PathToJsonFile);
+            var prefs = GetPreferences(pathToJsonFile);
            return prefs[(prefs.GetPosition(key))];
         }
         
@@ -62,20 +61,20 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// </summary>
         /// <param name="pathToJsonFile"></param>
         /// <returns></returns>
-        public Preferences<TKey, TValue> GetPreferences(string PathToJsonFile)
+        public Preferences<TKey, TValue> GetPreferences(string pathToJsonFile)
         {
             try
             {
                 Preferences<TKey, TValue> preferences = new Preferences<TKey, TValue>();
 
-                using (StreamReader file = File.OpenText(PathToJsonFile))
+                using (StreamReader file = File.OpenText(pathToJsonFile))
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
                     JObject json = (JObject)JToken.ReadFrom(reader);
 
                     for (int i = 0; i < json.Count; i++)
                     {
-                        KeyValuePair<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<KeyValuePair<TKey, TValue>>(json[i].ToString());
+                        KeyValuePair<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<KeyValuePair<TKey, TValue>>(json[i]?.ToString() ?? throw new InvalidOperationException());
                         preferences.Add(deserializedPreference);
                     }
                 }

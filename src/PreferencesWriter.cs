@@ -24,12 +24,11 @@ SOFTWARE.
 
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 using Newtonsoft.Json;
 
 using AluminiumTech.DevKit.SettingsKit.Base;
-
-using System;
 
 namespace AluminiumTech.DevKit.SettingsKit{    
     /// <summary>
@@ -49,19 +48,15 @@ namespace AluminiumTech.DevKit.SettingsKit{
         /// <summary>
         /// Add a preference to an existing settings file or creates a new one.
         /// </summary>
-        /// <param name="pathToJsonFile"></param>
         /// <param name="preference"></param>
         public void AddPreference(KeyValuePair<TKey, TValue> preference)
         {
             try
             {
-                JsonSerializer serializer = new JsonSerializer();
-
-                using (StreamWriter sw = new StreamWriter(PathToJsonFile))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, preference);
-                }
+                Preferences<TKey, TValue> preferences = new Preferences<TKey, TValue>();
+                preferences.Add(preference);
+                
+                AddPreferences(preferences);
             }
             catch(Exception ex)
             {
@@ -73,23 +68,32 @@ namespace AluminiumTech.DevKit.SettingsKit{
         /// <summary>
         /// Adds preferences to an existing settings file or creates a new one.
         /// </summary>
-        /// <param name="pathToJsonFile"></param>
         /// <param name="preferences"></param>
         public void AddPreferences(Preferences<TKey, TValue> preferences)
         {
             try
             {
-                for (int i = 0; i < preferences.Count; i++)
+                PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>();
+                var prefs = reader.GetPreferences(PathToJsonFile);
+
+                foreach (var pref in prefs)
                 {
-                    KeyValuePair<TKey, TValue> preference = preferences[i];
-                    AddPreference(preference);
+                    preferences.Add(pref);
                 }
+                
+                WriteJsonFile(preferences);
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 throw new Exception(ex.ToString());
             }
+        }
+
+        protected void WriteJsonFile(Preferences<TKey, TValue> preferences)
+        {
+            string contents = JsonConvert.SerializeObject(preferences);
+            File.WriteAllText(PathToJsonFile, contents);
         }
         
         /// <summary>
@@ -113,7 +117,10 @@ namespace AluminiumTech.DevKit.SettingsKit{
             {
                 PreferencesReader<TKey, TValue> reader = new PreferencesReader<TKey, TValue>();
                 var preferences = reader.GetPreferences(PathToJsonFile);
+                
                 preferences.Remove(preference);
+                
+                WriteJsonFile(preferences);
             }
             catch (Exception ex)
             {
