@@ -10,20 +10,19 @@
         <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageReleaseNotes>### Changes
-* Fixed some issues in ``PreferencesWriter``
-* Fixed some issues in ``Preferences``</PackageReleaseNotes>
+* Fixed some issues with PreferencesReader</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
-        <Version>2.0.1</Version>
-      <PackageVersion>2.0.1</PackageVersion>
+        <Version>2.0.2</Version>
+      <PackageVersion>2.0.2</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>

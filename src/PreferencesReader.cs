@@ -27,7 +27,6 @@ using System.IO;
 using System;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using AluminiumTech.DevKit.SettingsKit.Base;
 
@@ -65,21 +64,10 @@ namespace AluminiumTech.DevKit.SettingsKit
         {
             try
             {
-                Preferences<TKey, TValue> preferences = new Preferences<TKey, TValue>();
-
-                using (StreamReader file = File.OpenText(pathToJsonFile))
-                using (JsonTextReader reader = new JsonTextReader(file))
-                {
-                    JObject json = (JObject)JToken.ReadFrom(reader);
-
-                    for (int i = 0; i < json.Count; i++)
-                    {
-                        KeyValuePair<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<KeyValuePair<TKey, TValue>>(json[i]?.ToString() ?? throw new InvalidOperationException());
-                        preferences.Add(deserializedPreference);
-                    }
-                }
-
-                return preferences;
+                string json = File.ReadAllText(pathToJsonFile);
+                
+                Preferences<TKey, TValue> deserializedPreference = JsonConvert.DeserializeObject<Preferences<TKey, TValue>>(json);
+                return deserializedPreference;
             }
             catch(Exception ex)
             {
