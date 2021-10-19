@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>AluminiumTech.DevKit.SettingsKit</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>SettingsKit</Title>
@@ -19,6 +18,7 @@
       <PackageVersion>2.0.2</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
+        <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
