@@ -26,7 +26,7 @@ using System;
 
 namespace AluminiumTech.DevKit.SettingsKit
 {
-    public class Preference<TKey, TValue>
+    public class KeyValueData<TKey, TValue>
     {
         public TKey Key { get; set; }
         public TValue Value { get; set; }
@@ -35,7 +35,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         
         public DateTime LastEdited { get; set; }
 
-        public Preference()
+        public KeyValueData()
         {
             LastEdited = DateTime.Now;
         }

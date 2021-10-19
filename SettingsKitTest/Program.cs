@@ -14,18 +14,21 @@ namespace SettingsKitTest
 
             string path = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Testing.json";
 
-            PreferencesManager<string, string> preferences = new PreferencesManager<string, string>(path);
+            DataManager<string, string> preferences = new DataManager<string, string>(path);
+            
+            preferences.LoadData(path);
 
-            preferences.LoadPreferences(path);
+         //   preferences.AddData("aluminium_state", "awake", "super");
+         //   preferences.AddData("aluminium_emotion", "happy", "dope");
             
-            //preferences.AddPreference("aluminium_state", "awake", "awake");
-            
-            Console.WriteLine(preferences.GetPreference("aluminium_emotion").ToString());
-            Console.WriteLine(preferences.GetPreference("aluminium_state").ToString());
-            
+          //  preferences.AddData("pascal_replying_to_me", "no", "mayhaps");
+         //preferences.AddData("time_to_eat", "not_now", "never");
+          
+            Console.WriteLine(preferences.GetData("aluminium_emotion").ToString());
+           Console.WriteLine(preferences.GetData("aluminium_state").ToString());
+           Console.WriteLine(preferences.GetData("pascal_replying_to_me").ToString()); 
+           
         //    preferences.UpdatePreference("aluminium_emotion", "sad", "sad");
-            
-           // Console.WriteLine(preferences.GetPreference("aluminium_emotion").ToString());
         }
     }
 }
