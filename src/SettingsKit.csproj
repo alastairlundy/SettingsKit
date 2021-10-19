@@ -9,16 +9,25 @@
         <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageReleaseNotes>### Changes
-* Fixed some issues with PreferencesReader</PackageReleaseNotes>
+* Completely revamped and re-written the Preferences based system
+* Removed existing reader and writer classes.
+* API Compatibility is significantly different from the prior 2.x releases which is why this version is now at 3.0
+* The ``Preference&lt;TKey, TValue&gt;`` class is aimed at storing individual settings values.
+* The new ``PreferencesManager&lt;TKey, TValue&gt;`` class is aimed at managing the List of Preferences in a file, updating the file as the list of preferences is updated, writing the file changes to disk, reading a settings JSON file, and removing or adding settings to the settings file. - In our limited testing all of this functionality works in 3.0 however if any issues come up we will release bug fixes to 3.0 .
+
+Notes:
+The 2.x releases were pulled from Nuget for not working well or not working at all. This went unnoticed for some time due to inadequate testing on our part and we apologize for this. We discovered the issues when we tried to use SettingsKit 2.x releases for our own projects but constantly faced errors and issues. SettingsKit 3.0 represents a re-write of this library but features the same functionality as what was meant to have worked in prior versions. SettingsKit 3.0 uses JSON for now although future releases may offer saving settings using XML files as an option. LocalizationKit will also be updated to use SettingsKit 3.0 so that LocalizationKit works once again. We're sorry for releasing SettingsKit 2.x in the state that we did and we will aim to do better in the future. Thank you for your patience and understanding.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
-        <Version>2.0.2</Version>
-      <PackageVersion>2.0.2</PackageVersion>
+        <Version>3.0.0</Version>
+      <PackageVersion>3.0.0</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
         <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <FileVersion>3.0.0.0</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
