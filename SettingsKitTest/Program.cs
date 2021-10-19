@@ -14,7 +14,7 @@ namespace SettingsKitTest
 
             string path = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Testing.json";
 
-            Preferences<string, string> preferences = new Preferences<string, string>(path);
+            PreferencesManager<string, string> preferences = new PreferencesManager<string, string>(path);
 
             preferences.LoadPreferences(path);
             

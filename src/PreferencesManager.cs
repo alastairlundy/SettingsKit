@@ -36,7 +36,7 @@ namespace AluminiumTech.DevKit.SettingsKit
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     // ReSharper disable once UnusedType.Global
-    public class Preferences<TKey, TValue>
+    public class PreferencesManager<TKey, TValue>
     {
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         // ReSharper disable once InconsistentNaming
@@ -49,7 +49,7 @@ namespace AluminiumTech.DevKit.SettingsKit
 
       //  protected System.Timers.Timer _timer;
         
-        public Preferences(string pathToJsonFile, double autoSaveFrequencySeconds = 3600)
+        public PreferencesManager(string pathToJsonFile, double autoSaveFrequencySeconds = 3600)
         {
             PathToJsonFile = pathToJsonFile;
         /*    _timer = new System.Timers.Timer();
@@ -93,7 +93,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// 
         /// </summary>
         /// <param name="pathToJsonFile"></param>
-        public void WriteJsonFile(string pathToJsonFile)
+        protected void WriteJsonFile(string pathToJsonFile)
         {
             string contents = JsonConvert.SerializeObject(_preferences.ToArray());
             File.WriteAllText(pathToJsonFile, contents);
