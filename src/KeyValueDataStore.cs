@@ -23,19 +23,38 @@ SOFTWARE.
 */
 
 using System;
-
-using AluminiumTech.DevKit.SettingsKit;
+using System.Reflection;
 
 namespace AluminiumTech.DevKit.SettingsKit
 {
-    /// <summary>
-    /// Moved all the properties to KeyDataStore class.
-    /// This file and class will exist for compatibility until it is removed in v4.0
-    /// </summary>
-    /// <typeparam name="TKey"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    public class Preference<TKey, TValue> : KeyValueDataStore<TKey, TValue>
+    public class KeyValueDataStore<TKey, TValue>
     {
+        public TKey Key { get; set; }
+        public TValue Value { get; set; }
+        
+        public TValue DefaultValue { get; set; }
+        
+        public DateTime LastEdited { get; set; }
+        
+        public Version SettingsKitVersion { get; set; }
+        
+        public Version DataCompatibilityVersion { get; set; }
+        
+        public int DataRevision { get; set; }
 
+        public KeyValueDataStore()
+        {
+            LastEdited = DateTime.Now;
+
+            SettingsKitVersion = Assembly.GetCallingAssembly().GetName().Version;
+            
+            
+            DataRevision = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"Key:{Key} Value:{Value} DefaultValue:{DefaultValue} LastEdited:{LastEdited} CreatedOn:{SettingsKitVersion} Compatibility:{DataCompatibilityVersion} DataRevision:{DataRevision}";
+        }
     }
 }
