@@ -25,7 +25,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace AluminiumTech.DevKit.SettingsKit
@@ -45,28 +45,13 @@ namespace AluminiumTech.DevKit.SettingsKit
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         public string PathToJsonFile { get; set; }
         
-       // protected bool 
-
-      //  protected System.Timers.Timer _timer;
-        
-        public PreferencesManager(string pathToJsonFile, double autoSaveFrequencySeconds = 3600)
+        public PreferencesManager(string pathToJsonFile)
         {
             PathToJsonFile = pathToJsonFile;
-        /*    _timer = new System.Timers.Timer();
-            _timer.Interval = autoSaveFrequencySeconds * 1000;
-            _timer.Enabled = true;
-            _timer.Start();
-            _timer.Elapsed += TimerOnElapsed;
-           */ 
-        
+
             _preferences = new List<Preference<TKey, TValue>>();
         }
-
-      /*  private void TimerOnElapsed(object sender, ElapsedEventArgs e)
-        {
-            if()
-        }
-*/
+        
         /// <summary>
         /// 
         /// </summary>
@@ -78,9 +63,9 @@ namespace AluminiumTech.DevKit.SettingsKit
             {
                 string json = File.ReadAllText(pathToJsonFile);
                 
-                List<Preference<TKey, TValue>> deserializedPreference = JsonConvert.DeserializeObject<List<Preference<TKey, TValue>>>(json);
-                
-                ImportPreferences(deserializedPreference);
+                var deserializedPreference = JsonConvert.DeserializeObject<Preference<TKey, TValue>[]>(json);
+
+                if (deserializedPreference != null) ImportPreferences(deserializedPreference.ToList());
             }
             catch(Exception ex)
             {
@@ -139,9 +124,8 @@ namespace AluminiumTech.DevKit.SettingsKit
             {
                 foreach (var preference in preferences)
                 {
-                    _preferences.Add(preference);
+                   AddPreference(preference.Key, preference.Value, preference.DefaultValue);
                 }
-                WriteJsonFile(PathToJsonFile);
             }
             catch (Exception exception)
             {
