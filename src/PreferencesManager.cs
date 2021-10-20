@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using Newtonsoft.Json;
 
 namespace AluminiumTech.DevKit.SettingsKit
@@ -40,7 +41,7 @@ namespace AluminiumTech.DevKit.SettingsKit
     {
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         // ReSharper disable once InconsistentNaming
-        protected List<Preference<TKey, TValue>> _preferences;
+        protected List<KeyValueDataStore<TKey, TValue>> _preferences;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         public string PathToJsonFile { get; set; }
@@ -49,7 +50,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         {
             PathToJsonFile = pathToJsonFile;
 
-            _preferences = new List<Preference<TKey, TValue>>();
+            _preferences = new List<KeyValueDataStore<TKey, TValue>>();
         }
         
         /// <summary>
@@ -63,7 +64,7 @@ namespace AluminiumTech.DevKit.SettingsKit
             {
                 string json = File.ReadAllText(pathToJsonFile);
                 
-                var deserializedPreference = JsonConvert.DeserializeObject<Preference<TKey, TValue>[]>(json);
+                var deserializedPreference = JsonConvert.DeserializeObject<KeyValueDataStore<TKey, TValue>[]>(json);
 
                 if (deserializedPreference != null) ImportPreferences(deserializedPreference.ToList());
             }
@@ -90,7 +91,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="key"></param>
         /// <returns></returns>
         /// <exception cref="KeyNotFoundException">Throws an exception if it is unable to find a preference with the specified key.</exception>
-        public Preference<TKey, TValue> GetPreference(TKey key)
+        public KeyValueDataStore<TKey, TValue> GetPreference(TKey key)
         {
             foreach (var preference in _preferences)
             {
@@ -118,13 +119,18 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// </summary>
         /// <param name="preferences"></param>
         /// <exception cref="Exception"></exception>
-        public void ImportPreferences(List<Preference<TKey, TValue>> preferences)
+        public void ImportPreferences(List<KeyValueDataStore<TKey, TValue>> preferences)
+        { 
+            ImportPreferences(preferences.ToArray());
+        }
+
+        public void ImportPreferences(KeyValueDataStore<TKey, TValue>[] preferences)
         {
             try
             {
                 foreach (var preference in preferences)
                 {
-                   AddPreference(preference.Key, preference.Value, preference.DefaultValue);
+                    AddPreference(preference.Key, preference.Value, preference.DefaultValue);
                 }
             }
             catch (Exception exception)
@@ -141,7 +147,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="default"></param>
         public void AddPreference(TKey key, TValue value, TValue @default)
         {
-            Preference<TKey, TValue> preference = new Preference<TKey, TValue>();
+            KeyValueDataStore<TKey, TValue> preference = new KeyValueDataStore<TKey, TValue>();
             preference.Key = key;
             preference.Value = value;
             preference.DefaultValue = @default;
@@ -258,6 +264,7 @@ namespace AluminiumTech.DevKit.SettingsKit
                     _preferences.RemoveAt(index);
                 }
             }
+            
             WriteJsonFile(PathToJsonFile);
         }
 
@@ -265,7 +272,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// Enables easy access to the internal list in the class.
         /// </summary>
         /// <returns></returns>
-        public List<Preference<TKey, TValue>> ToList()
+        public List<KeyValueDataStore<TKey, TValue>> ToList()
         {
             return _preferences;
         }
