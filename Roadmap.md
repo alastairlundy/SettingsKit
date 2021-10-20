@@ -29,3 +29,4 @@ Potential future Roadmap of SettingsKit
 
 ### 4.0
 * Removed support for ``Preference<TKey, TValue>`` class in it's current form.
+* Remove dependency on Newtonsoft.JSON in favor of .NET's new built in JSON (de)serialization.
