@@ -2,7 +2,7 @@
 Potential future Roadmap of SettingsKit
 
 ### 3.1
-* Started migration away from ``Preference<TKey, TValue>`` - All previous functionality has been moved to ``KeyValueDataStore`` and it nows inherits ``KeyValueDataStore``.
+* Start migration away from ``Preference<TKey, TValue>`` - All previous functionality has been moved to ``KeyValueDataStore`` and it nows inherits ``KeyValueDataStore``.
 * Add support for migrating between ``KeyValueDataStore`` changes or versions in the future.
 
 ### 3.2
