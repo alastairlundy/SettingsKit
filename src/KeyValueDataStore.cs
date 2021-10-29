@@ -37,24 +37,17 @@ namespace AluminiumTech.DevKit.SettingsKit
         public DateTime LastEdited { get; set; }
         
         public Version SettingsKitVersion { get; set; }
-        
-        public Version DataCompatibilityVersion { get; set; }
-        
-        public int DataRevision { get; set; }
 
         public KeyValueDataStore()
         {
             LastEdited = DateTime.Now;
 
             SettingsKitVersion = Assembly.GetCallingAssembly().GetName().Version;
-            
-            
-            DataRevision = 0;
         }
 
         public override string ToString()
         {
-            return $"Key:{Key} Value:{Value} DefaultValue:{DefaultValue} LastEdited:{LastEdited} CreatedOn:{SettingsKitVersion} Compatibility:{DataCompatibilityVersion} DataRevision:{DataRevision}";
+            return $"Key:{Key} Value:{Value} DefaultValue:{DefaultValue} LastEdited:{LastEdited} CreatedOn:{SettingsKitVersion}";
         }
     }
 }
