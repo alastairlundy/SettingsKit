@@ -9,26 +9,21 @@
         <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageReleaseNotes>### Changes
-* Completely revamped and re-written the Preferences based system
-* Removed existing reader and writer classes.
-* API Compatibility is significantly different from the prior 2.x releases which is why this version is now at 3.0
-* The ``Preference&lt;TKey, TValue&gt;`` class is aimed at storing individual settings values.
-* The new ``PreferencesManager&lt;TKey, TValue&gt;`` class is aimed at managing the List of Preferences in a file, updating the file as the list of preferences is updated, writing the file changes to disk, reading a settings JSON file, and removing or adding settings to the settings file. - In our limited testing all of this functionality works in 3.0 however if any issues come up we will release bug fixes to 3.0 .
-
-Notes:
-The 2.x releases were pulled from Nuget for not working well or not working at all. This went unnoticed for some time due to inadequate testing on our part and we apologize for this. We discovered the issues when we tried to use SettingsKit 2.x releases for our own projects but constantly faced errors and issues. SettingsKit 3.0 represents a re-write of this library but features the same functionality as what was meant to have worked in prior versions. SettingsKit 3.0 uses JSON for now although future releases may offer saving settings using XML files as an option. LocalizationKit will also be updated to use SettingsKit 3.0 so that LocalizationKit works once again. We're sorry for releasing SettingsKit 2.x in the state that we did and we will aim to do better in the future. Thank you for your patience and understanding.</PackageReleaseNotes>
+* Start migration away from ``Preference&lt;TKey, TValue&gt;`` - All previous functionality has been moved to ``KeyValueDataStore`` and it nows inherits ``KeyValueDataStore`` - This is now deprecated and will likely be removed in 4.x
+* Removed some unneeded properties and variables from ``KeyValueDataStore&lt;Tkey, TValue&gt;`` 
+* Added new ``ValueRangeDataStore&lt;TKey, TValue&gt;`` to be designed to be more appropriate for numerical Settings Values where a minimum and maximum value is provided or expected - This class inherits ``KeyValueDataStore&lt;TKey, TValue&gt;``.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
-        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
         <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <FileVersion>3.0.0.0</FileVersion>
-        <Version>3.0.0</Version>
-        <PackageVersion>3.0.0</PackageVersion>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <AssemblyVersion>3.1.0.0</AssemblyVersion>
+        <FileVersion>3.1.0.0</FileVersion>
+        <Version>3.1.0</Version>
+        <PackageVersion>3.1.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -39,14 +34,16 @@ The 2.x releases were pulled from Nuget for not working well or not working at a
         <None Include="..\README.md">
             <Pack>True</Pack>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <PackagePath></PackagePath>
         </None>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <None Include="..\LICENSE.md">
-        <Pack>True</Pack>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+        <None Include="..\LICENSE.md">
+            <Pack>True</Pack>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <PackagePath></PackagePath>
+        </None>
     </ItemGroup>
 
 </Project>
