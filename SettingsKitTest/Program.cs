@@ -21,9 +21,6 @@ namespace SettingsKitTest
          //   preferences.AddData("aluminium_state", "awake", "super");
          //   preferences.AddData("aluminium_emotion", "happy", "dope");
             
-          //  preferences.AddData("pascal_replying_to_me", "no", "mayhaps");
-         //preferences.AddData("time_to_eat", "not_now", "never");
-          
             Console.WriteLine(preferences.GetData("aluminium_emotion").ToString());
            Console.WriteLine(preferences.GetData("aluminium_state").ToString());
            Console.WriteLine(preferences.GetData("pascal_replying_to_me").ToString()); 
