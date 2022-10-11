@@ -22,20 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using AluminiumTech.DevKit.SettingsKit.enums;
+namespace AluminiumTech.DevKit.SettingsKit;
 
-namespace AluminiumTech.DevKit.SettingsKit
+public class Preference<TKey, TValue>
 {
-    public class SettingsSavingInformation
-    {
-        public SettingsSavingMode SavingMode { get; set; }
-        
-        public double AutoSaveFrequencyMinutes { get; set; }
-
-        public SettingsSavingInformation()
-        {
-            AutoSaveFrequencyMinutes = 5;
-            SavingMode = SettingsSavingMode.SaveAfterEveryChange;
-        }
-    }
+    public TKey Key { get; set; }
+    
+    public TValue Value {get; set;}
+    
+    public TValue Default {get; set;}
 }
