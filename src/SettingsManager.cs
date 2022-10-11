@@ -281,7 +281,7 @@ namespace AluminiumTech.DevKit.SettingsKit
             }
             catch(Exception exception)
             {
-                throw new KeyNotFoundException();
+                throw new Exception(exception.ToString());
             }
         }
 
