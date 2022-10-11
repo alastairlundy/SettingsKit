@@ -44,7 +44,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         // ReSharper disable once InconsistentNaming
-        protected List<Preference<TKey, TValue>> listOfData;
+        protected List<KeyValuePair<TKey, TValue>> listOfData;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         public string PathToJsonFile { get; set; }
@@ -56,16 +56,20 @@ namespace AluminiumTech.DevKit.SettingsKit
         public SettingsManager(string pathToJsonFile)
         {
             PathToJsonFile = pathToJsonFile;
-            listOfData = new List<Preference<TKey, TValue>>();
-            SavingInformation = new SettingsSavingInformation();
-            SavingInformation.SavingMode = SettingsSavingMode.SaveAfterEveryChange;
+            listOfData = new List<KeyValuePair<TKey, TValue>>();
+           
+            SavingInformation = new SettingsSavingInformation()
+            {
+                SavingMode = SettingsSavingMode.SaveAfterEveryChange
+            };
+            
             LoadTimer();
         }
 
         public SettingsManager(string pathToJsonFile, SettingsSavingInformation savingInformation)
         {
             PathToJsonFile = pathToJsonFile;
-            listOfData = new List<Preference<TKey, TValue>>();
+            listOfData = new List<KeyValuePair<TKey, TValue>>();
             SavingInformation = savingInformation;
             LoadTimer();
         }
@@ -110,7 +114,7 @@ namespace AluminiumTech.DevKit.SettingsKit
             {
                 string json = File.ReadAllText(pathToJsonFile);
 
-               List<Preference<TKey, TValue>> deserializeObject = JsonSerializer.Deserialize<List<Preference<TKey, TValue>>>(json);
+               List<KeyValuePair<TKey, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<TKey, TValue>>>(json);
                 
                 //var deserializeObject = JsonConvert.DeserializeObject<Data<TKey, TValue>[]>(json);
 
@@ -133,43 +137,14 @@ namespace AluminiumTech.DevKit.SettingsKit
             File.WriteAllText(pathToJsonFile, contents);
             ModifiedSinceLastSave = false;
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        /// <exception cref="KeyNotFoundException">Throws an exception if it is unable to find a preference with the specified key.</exception>
-        public KeyValuePair<TKey, TValue> GetData(TKey key)
-        {
-            foreach (var data in listOfData)
-            {
-                if (key is string)
-                {
-                    if (data.Key.ToString().ToLower().Equals(key.ToString().ToLower()))
-                    {
-                        return new KeyValuePair<TKey, TValue>(data.Key, data.Value);
-                    }
-                }
-                else
-                {
-                    if (data.Key.Equals(key))
-                    {
-                        return new KeyValuePair<TKey, TValue>(data.Key, data.Value);
-                    }
-                }
-            }
 
-            throw new KeyNotFoundException();
-        }
-        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
         /// <exception cref="KeyNotFoundException">Throws an exception if it is unable to find a preference with the specified key.</exception>
-        public Preference<TKey, TValue> GetPreference(TKey key)
+        public KeyValuePair<TKey, TValue> Get(TKey key)
         {
             foreach (var data in listOfData)
             {
@@ -192,26 +167,18 @@ namespace AluminiumTech.DevKit.SettingsKit
             throw new KeyNotFoundException();
         }
 
-        public void ImportData(KeyValuePair<TKey, TValue>[] data)
-        {
-            foreach (var keyValueData in data)
-            {
-                AddData(keyValueData.Key, keyValueData.Value);       
-            }
-        }
-        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data"></param>
         /// <exception cref="Exception"></exception>
-        public void ImportData(Preference<TKey, TValue>[] data)
+        public void ImportData(KeyValuePair<TKey, TValue>[] data)
         {
             try
             {
                 foreach (var preference in data)
                 {
-                   AddData(preference.Key, preference.Value, preference.Default);
+                   Set(preference.Key, preference.Value);
                 }
             }
             catch (Exception exception)
@@ -225,7 +192,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void AddData(TKey key, TValue value)
+        public void Set(TKey key, TValue value)
         {
             try
             {
@@ -234,48 +201,7 @@ namespace AluminiumTech.DevKit.SettingsKit
                     throw new ArgumentException("Key already exists in dataset.");
                 }
                 
-                listOfData.Add(new Preference<TKey, TValue>()
-                {
-                    Key = key,
-                    Value = value
-                });
-            
-                if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
-                {
-                    WriteJsonFile(PathToJsonFile);
-                }
-                else
-                {
-                    ModifiedSinceLastSave = true;
-                }
-            }
-            catch(Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="defaultValue"></param>
-        public void AddData(TKey key, TValue value, TValue defaultValue)
-        {
-            try
-            {
-                if (DoesDataExist(key))
-                {
-                    throw new ArgumentException("Key already exists in dataset.");
-                }
-
-                Preference<TKey, TValue> data = new Preference<TKey, TValue>();
-                data.Default = defaultValue;
-                data.Key = key;
-                data.Value = value;
-
-                listOfData.Add(data);
+                listOfData.Add(new KeyValuePair<TKey, TValue>(key, value));
             
                 if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
                 {
@@ -298,61 +224,17 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// /// <exception cref="Exception"></exception>
-         public void UpdateData(TKey key, TValue value)
-         {
-            try
-            {
-                if (!DoesDataExist(key))
-                {
-                    AddData(key, value);
-                }
-                else
-                {
-                    listOfData[GetDataPosition(key)] = new Preference<TKey, TValue>()
-                    {
-                        Key = key,
-                        Value = value
-                    };
-                }
-
-                if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
-                {
-                    WriteJsonFile(PathToJsonFile);
-                }
-                else
-                {
-                    ModifiedSinceLastSave = true;
-                }
-            }
-            catch(Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="defaultValue"></param>
-        /// /// <exception cref="Exception"></exception>
-        public void UpdateData(TKey key, TValue value, TValue defaultValue)
+        public void Update(TKey key, TValue value)
         {
             try
             {
                 if (!DoesDataExist(key))
                 {
-                    AddData(key, value);
+                    Set(key, value);
                 }
                 else
                 {
-                    listOfData[GetDataPosition(key)] = new Preference<TKey, TValue>()
-                    {
-                        Default = defaultValue,
-                        Key = key,
-                        Value = value,
-                    };
+                    listOfData[GetDataPosition(key)] = new KeyValuePair<TKey, TValue>(key, value);
                 }
 
                 if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
@@ -374,7 +256,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// 
         /// </summary>
         /// <param name="key"></param>
-        public void RemoveData(TKey key)
+        public void Remove(TKey key)
         {
             try
             {
@@ -489,7 +371,7 @@ namespace AluminiumTech.DevKit.SettingsKit
             }
         }
 
-        public List<Preference<TKey, TValue>> ToList()
+        public List<KeyValuePair<TKey, TValue>> ToList()
         {
             return listOfData;
         }

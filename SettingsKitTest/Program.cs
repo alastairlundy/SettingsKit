@@ -18,16 +18,16 @@ namespace SettingsKitTest
             
             //preferences.LoadData(path);
 
-            preferences.AddData("aluminium_state", "awake");
-            preferences.AddData("aluminium_emotion", "happy");
-            preferences.AddData("pascal_replying_to_me", "no");
-            preferences.AddData("time_to_eat", "not_now");
+            preferences.Set("aluminium_state", "awake");
+            preferences.Set("aluminium_emotion", "happy");
+            preferences.Set("pascal_replying_to_me", "no");
+            preferences.Set("time_to_eat", "not_now");
 
             preferences.WriteJsonFile(path);
             
-            Console.WriteLine(preferences.GetData("aluminium_emotion").ToString());
-           Console.WriteLine(preferences.GetData("aluminium_state").ToString());
-           Console.WriteLine(preferences.GetData("pascal_replying_to_me").ToString()); 
+            Console.WriteLine(preferences.Get("aluminium_emotion").ToString());
+           Console.WriteLine(preferences.Get("aluminium_state").ToString());
+           Console.WriteLine(preferences.Get("pascal_replying_to_me").ToString()); 
            
         //    preferences.UpdatePreference("aluminium_emotion", "sad", "sad");
         }
