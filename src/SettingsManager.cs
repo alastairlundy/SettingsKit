@@ -47,7 +47,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         protected List<KeyValuePair<TKey, TValue>> listOfData;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
-        public string PathToJsonFile { get; set; }
+        public string PathToFile { get; set; }
 
         protected Timer _timer;
 
@@ -55,7 +55,7 @@ namespace AluminiumTech.DevKit.SettingsKit
 
         public SettingsManager(string pathToJsonFile)
         {
-            PathToJsonFile = pathToJsonFile;
+            PathToFile = pathToJsonFile;
             listOfData = new List<KeyValuePair<TKey, TValue>>();
            
             SavingInformation = new SettingsSavingInformation()
@@ -68,7 +68,7 @@ namespace AluminiumTech.DevKit.SettingsKit
 
         public SettingsManager(string pathToJsonFile, SettingsSavingInformation savingInformation)
         {
-            PathToJsonFile = pathToJsonFile;
+            PathToFile = pathToJsonFile;
             listOfData = new List<KeyValuePair<TKey, TValue>>();
             SavingInformation = savingInformation;
             LoadTimer();
@@ -92,7 +92,7 @@ namespace AluminiumTech.DevKit.SettingsKit
         {
             if (ModifiedSinceLastSave && SavingInformation.SavingMode == SettingsSavingMode.AutoSaveAfterTimeMinutes)
             {
-                WriteJsonFile(PathToJsonFile);
+                WriteJsonFile(PathToFile);
 
                 if (SavingInformation.AutoSaveFrequencyMinutes > 5)
                 {
@@ -108,7 +108,12 @@ namespace AluminiumTech.DevKit.SettingsKit
             }
         }
         
-        public void LoadData(string pathToJsonFile)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pathToJsonFile"></param>
+        /// <exception cref="Exception"></exception>
+        public void LoadJson(string pathToJsonFile)
         {
             try
             {
@@ -126,7 +131,7 @@ namespace AluminiumTech.DevKit.SettingsKit
                 throw new Exception(exception.ToString());
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -205,7 +210,7 @@ namespace AluminiumTech.DevKit.SettingsKit
             
                 if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
                 {
-                    WriteJsonFile(PathToJsonFile);
+                    WriteJsonFile(PathToFile);
                 }
                 else
                 {
@@ -239,7 +244,7 @@ namespace AluminiumTech.DevKit.SettingsKit
 
                 if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
                 {
-                    WriteJsonFile(PathToJsonFile);
+                    WriteJsonFile(PathToFile);
                 }
                 else
                 {
@@ -266,7 +271,7 @@ namespace AluminiumTech.DevKit.SettingsKit
 
                     if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
                     {
-                        WriteJsonFile(PathToJsonFile);
+                        WriteJsonFile(PathToFile);
                     }
                     else
                     {
@@ -363,7 +368,7 @@ namespace AluminiumTech.DevKit.SettingsKit
             
             if (SavingInformation.SavingMode == SettingsSavingMode.SaveAfterEveryChange)
             {
-                WriteJsonFile(PathToJsonFile);
+                WriteJsonFile(PathToFile);
             }
             else
             {
