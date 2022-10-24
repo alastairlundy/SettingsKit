@@ -119,10 +119,20 @@ namespace AluminiumTech.DevKit.SettingsKit
             {
                 string json = File.ReadAllText(pathToJsonFile);
 
-               List<KeyValuePair<TKey, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<TKey, TValue>>>(json);
+                if (json.Contains("key:"))
+                {
+                   json = json.Replace("key:", "Key:");
+                }
+
+                if (json.Contains("value:"))
+                {
+                    json = json.Replace("value:", "Value:");
+                }
+
+                List<KeyValuePair<TKey, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<TKey, TValue>>>(json);
                 
                 //var deserializeObject = JsonConvert.DeserializeObject<Data<TKey, TValue>[]>(json);
-
+                   
                 ImportData(deserializeObject.ToArray());
             }
             catch(Exception exception)
