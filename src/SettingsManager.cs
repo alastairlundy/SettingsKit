@@ -148,9 +148,23 @@ namespace AluminiumTech.DevKit.SettingsKit
         /// <param name="pathToJsonFile"></param>
         public void WriteJsonFile(string pathToJsonFile)
         {
-            string contents = JsonSerializer.Serialize(listOfData.ToArray());
-            File.WriteAllText(pathToJsonFile, contents);
-            ModifiedSinceLastSave = false;
+            try
+            {
+                string contents = JsonSerializer.Serialize(listOfData.ToArray());
+
+                #if DEBUG
+                    Console.WriteLine(contents);
+                #endif
+
+                File.WriteAllText(pathToJsonFile, contents);
+
+                ModifiedSinceLastSave = false;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
+            }
         }
 
         /// <summary>
