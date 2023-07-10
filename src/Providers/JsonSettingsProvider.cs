@@ -69,7 +69,7 @@ namespace AlastairLundy.SettingsKit
             catch(Exception exception)
             {
                 Console.WriteLine(exception.ToString());
-                throw new Exception(exception.ToString());
+                throw;
             }
         }
 
@@ -93,7 +93,7 @@ namespace AlastairLundy.SettingsKit
             catch (Exception exception)
             {
                 Console.WriteLine(exception.ToString());
-                throw new Exception(exception.ToString());
+                throw;
             }
         }
     }
