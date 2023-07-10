@@ -6,19 +6,28 @@
         <Title>SettingsKit</Title>
         <Authors>AlastairLundy</Authors>
         <Copyright>Copyright (c) AlastairLundy 2021-2023</Copyright>
-        <RepositoryUrl>https://gitlab.com/alastairlundy/SettingsKit/</RepositoryUrl>
+        <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.0 series
+* Initial experimental support for saving and writing Settings as an XML file.
+* Significantly revamped SettingsManager
+* Namespaces changes
+* Class name changes
+* Improved exception checking
+* Added ability to correct an issue that may arise with Key and Value declarations.
+
+## Regressions and Known Issues
+* Auto Saving functionality has been temporarily removed but is expected to return in a future version.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
-        <Version>3.0.0</Version>
-      <PackageVersion>5.0.0</PackageVersion>
+        <Version>5.0.0</Version>
+      <PackageVersion>5.0.0-alpha.1</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <FileVersion>3.0.0.0</FileVersion>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <FileVersion>5.0.0.0</FileVersion>
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
