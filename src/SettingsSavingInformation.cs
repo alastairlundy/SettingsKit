@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using AluminiumTech.DevKit.SettingsKit.enums;
+using AlastairLundy.SettingsKit.enums;
 
-namespace AluminiumTech.DevKit.SettingsKit
+namespace AlastairLundy.SettingsKit
 {
     public class SettingsSavingInformation
     {
