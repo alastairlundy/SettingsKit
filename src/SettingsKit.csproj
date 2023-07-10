@@ -20,7 +20,7 @@
 * Auto Saving functionality has been temporarily removed but is expected to return in a future version.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
-        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
         <Version>5.0.0</Version>
       <PackageVersion>5.0.0-alpha.1</PackageVersion>
