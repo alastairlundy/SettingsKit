@@ -24,7 +24,7 @@ SOFTWARE.
 
 using AlastairLundy.SettingsKit.enums;
 
-namespace AlastairLundy.SettingsKit
+namespace AlastairLundy.SettingsKit.AutoSaving
 {
     public class SettingsSavingInformation
     {
