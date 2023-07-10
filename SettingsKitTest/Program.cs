@@ -37,11 +37,10 @@ namespace SettingsKitTest
 
             string path = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Testing.json";
 
-            JsonSettingsProvider<string, string> preferences = new JsonSettingsProvider<string, string>();
-   
+            JsonSettingsProvider<string, string> settingsProvider = new JsonSettingsProvider<string, string>();
+
+            var settings = settingsProvider.Get(path);
             
-           
-        //    preferences.UpdatePreference("aluminium_emotion", "sad", "sad");
         }
     }
 }
