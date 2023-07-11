@@ -1,10 +1,6 @@
 ## Roadmap
 Potential future Roadmap of SettingsKit
 
-### 5.0
-* Add support for saving settings as XML files.
-* Add support for saving settings as TXT files.
-
 ### 5.1
 * Add support for Multi Dimensional Settings/Splitting up settings into separate files.
 
