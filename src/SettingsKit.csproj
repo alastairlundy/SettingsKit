@@ -8,22 +8,21 @@
         <Copyright>Copyright (c) AlastairLundy 2021-2023</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 4.0 series
-* Initial experimental support for saving and writing Settings as an XML file.
-* Significantly revamped SettingsManager
-* Namespaces changes
-* Class name changes
-* Improved exception checking
-* Added ability to correct an issue that may arise with Key and Value declarations.
+        <PackageReleaseNotes>## Changes since 5.0.0 Alpha 1
 
-## Regressions and Known Issues
-* Auto Saving functionality has been temporarily removed but is expected to return in a future version.</PackageReleaseNotes>
+### Code changes
+* Fixed potential issues with XML De-serialization
+* Updated Settings Provider implementation namespaces
+* Added missing copyright notices
+
+### Non-code Changes
+* Added Readme to Nuget package</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
         <Version>5.0.0</Version>
-      <PackageVersion>5.0.0-alpha.1</PackageVersion>
+      <PackageVersion>5.0.0-alpha.2</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
