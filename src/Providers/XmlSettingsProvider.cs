@@ -27,9 +27,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+
 using AlastairLundy.SettingsKit.Interfaces;
 
-namespace AlastairLundy.SettingsKit;
+namespace AlastairLundy.SettingsKit.Providers;
 
 public class XmlSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>
 {
@@ -38,21 +39,17 @@ public class XmlSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>
     {
         try
         {
-            FileStream fileStream = new FileStream(pathToFile, FileMode.Open, FileAccess.Read);
-
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<TKey, TValue>>));
 
-            List<KeyValuePair<TKey, TValue>> deserialized =
-                (List<KeyValuePair<TKey, TValue>>)xmlSerializer.Deserialize(fileStream);
+            KeyValuePair<TKey, TValue>[] i;
+            
+            using (Stream reader = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
+            {
+                // Call the Deserialize method to restore the object's state.
+                i = (KeyValuePair<TKey, TValue>[])xmlSerializer.Deserialize(reader);
+            }
 
-            if (deserialized != null)
-            {
-                return deserialized.ToArray();
-            }
-            else
-            {
-                throw new NullReferenceException();
-            }
+            return i;
         }
         catch (Exception exception)
         {
