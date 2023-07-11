@@ -29,7 +29,7 @@ using System.Text.Json;
 
 using AlastairLundy.SettingsKit.Interfaces;
 
-namespace AlastairLundy.SettingsKit
+namespace AlastairLundy.SettingsKit.Providers
 {
     /// <summary>
     /// 
