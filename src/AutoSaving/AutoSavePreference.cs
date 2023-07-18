@@ -26,13 +26,13 @@ using AlastairLundy.SettingsKit.enums;
 
 namespace AlastairLundy.SettingsKit.AutoSaving
 {
-    public class SettingsAutoSavingInformation
+    public class AutoSavePreference
     {
         public SettingsSavingMode SavingMode { get; set; }
         
         public double AutoSaveFrequencyMinutes { get; set; }
 
-        public SettingsAutoSavingInformation()
+        public AutoSavePreference()
         {
             AutoSaveFrequencyMinutes = 5;
             SavingMode = SettingsSavingMode.SaveAfterEveryChange;
