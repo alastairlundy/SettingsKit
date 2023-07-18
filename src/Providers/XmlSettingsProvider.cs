@@ -28,8 +28,6 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-using AlastairLundy.SettingsKit.Interfaces;
-
 namespace AlastairLundy.SettingsKit.Providers;
 
 public class XmlSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>

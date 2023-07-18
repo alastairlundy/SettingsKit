@@ -27,8 +27,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-using AlastairLundy.SettingsKit.Interfaces;
-
 namespace AlastairLundy.SettingsKit.Providers
 {
     /// <summary>
