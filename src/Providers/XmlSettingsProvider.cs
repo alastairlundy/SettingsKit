@@ -30,9 +30,19 @@ using System.Xml.Serialization;
 
 namespace AlastairLundy.SettingsKit.Providers;
 
+/// <summary>
+/// A class to read and write Settings to XML files.
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="TValue"></typeparam>
 public class XmlSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>
 {
 
+    /// <summary>
+    /// Read Settings from a Settings XML file.
+    /// </summary>
+    /// <param name="pathToFile"></param>
+    /// <returns></returns>
     public KeyValuePair<TKey, TValue>[] Get(string pathToFile)
     {
         try
@@ -56,7 +66,11 @@ public class XmlSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>
         }
     }
 
-
+    /// <summary>
+    /// Write the settings to the XML file.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="pathToFile"></param>
     public void WriteToFile(KeyValuePair<TKey, TValue>[] data, string pathToFile)
     {
         try
