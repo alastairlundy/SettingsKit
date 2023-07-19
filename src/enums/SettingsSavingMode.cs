@@ -28,5 +28,6 @@ namespace AlastairLundy.SettingsKit.enums
     {
         AutoSaveAfterTimeMinutes,
         SaveAfterEveryChange,
+        SaveManuallyOnly
     }
 }
