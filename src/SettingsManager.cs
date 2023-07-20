@@ -27,10 +27,21 @@ using System.Collections.Generic;
 
 namespace AlastairLundy.SettingsKit;
 
+/// <summary>
+/// A class to make managing Settings Files easier.
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="TValue"></typeparam>
 public class SettingsManager<TKey, TValue>
 {
 
-
+    /// <summary>
+    /// Gets a specified KeyValuePair from a KeyValuePair array.
+    /// </summary>
+    /// <param name="array"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="KeyNotFoundException"></exception>
     public KeyValuePair<TKey, TValue> GetKeyValuePair(KeyValuePair<TKey, TValue>[] array, TKey key)
     {
         try
