@@ -8,18 +8,20 @@
         <Copyright>Copyright (c) AlastairLundy 2021-2023</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 2
-* Created ``ISettingsFile&lt;TKey, TValue&gt;`` Interface
-* Created ``SettingsFile&lt;TKey, TValue&gt;`` Class
-* Added in code documentation in ``XmlSettingsProvider&lt;TKey, TValue&gt;`` and ``JsonSettingsProvider&lt;TKey, TValue&gt;``
-* Rename ``SettingsAutoSavingInformation`` to ``AutoSavePreference``</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 3
+* Changed ``AutoSavePreference`` to ``SavePreference``
+* Add in code documentation for SettingsManager
+* Renamed ``ISettingsProvider`` to ``ISettingsFileProvider``
+* Renamed ``JsonSettingsProvider`` to ``JsonSettingsFileProvider``
+* Renamed ``XmlSettingsProvider`` to ``XmlSettingsFileProvider``
+*Added additional methods to ``SettingsFile``</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
         <Version>5.0.0</Version>
-      <PackageVersion>5.0.0-alpha.3</PackageVersion>
+      <PackageVersion>5.0.0-beta.1</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
