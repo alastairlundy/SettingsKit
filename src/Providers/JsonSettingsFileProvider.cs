@@ -35,7 +35,7 @@ namespace AlastairLundy.SettingsKit.Providers
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     // ReSharper disable once UnusedType.Global
-    public class JsonSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>
+    public class JsonSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey, TValue>
     {
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
 

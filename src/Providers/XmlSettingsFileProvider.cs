@@ -35,7 +35,7 @@ namespace AlastairLundy.SettingsKit.Providers;
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
-public class XmlSettingsProvider<TKey, TValue> : ISettingsProvider<TKey, TValue>
+public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey, TValue>
 {
 
     /// <summary>

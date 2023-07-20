@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 namespace AlastairLundy.SettingsKit;
 
-public interface ISettingsProvider<TKey, TValue>
+public interface ISettingsFileProvider<TKey, TValue>
 {
     KeyValuePair<TKey, TValue>[] Get(string pathToFile);
 
