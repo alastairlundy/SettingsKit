@@ -28,7 +28,7 @@ namespace AlastairLundy.SettingsKit;
 
 public interface ISettingsFile<TKey, TValue>
 {
-    public ISettingsProvider<TKey, TValue> SettingsProvider { get; }
+    public ISettingsFileProvider<TKey, TValue> SettingsProvider { get; }
 
     public void Add(KeyValuePair<TKey, TValue> pair);
 
