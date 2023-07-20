@@ -23,26 +23,30 @@ SOFTWARE.
 */
 
 using System.Collections.Generic;
+using System.IO;
 using System.Timers;
-
-using AlastairLundy.SettingsKit.AutoSaving;
 using AlastairLundy.SettingsKit.enums;
 // ReSharper disable InconsistentNaming
 
 namespace AlastairLundy.SettingsKit;
 
+/// <summary>
+/// A class to represent and help manage a logical representation of a Settings File.
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="TValue"></typeparam>
 public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
 {
     internal List<KeyValuePair<TKey, TValue>> KeyValuePairs { get; set; }
     
     public ISettingsProvider<TKey, TValue> SettingsProvider { get; }
     
-    public string FilePath { get; }
+    public string FilePath { get; set; }
 
 
     private System.Timers.Timer _timer;
     
-    public AutoSavePreference Preference { get;  }
+    public SavePreference Preference { get;  }
 
     /// <summary>
     /// 
@@ -55,7 +59,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
         SettingsProvider = provider;
         _timer = new Timer();
         KeyValuePairs = new List<KeyValuePair<TKey, TValue>>();
-        Preference = new AutoSavePreference();
+        Preference = new SavePreference();
         Preference.SavingMode = SettingsSavingMode.SaveManuallyOnly;
 
         _timer.Enabled = false;
@@ -67,7 +71,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
     /// <param name="autoSavePreference">The AutoSave preference to use.</param>
-    public SettingsFile(string filePath, ISettingsProvider<TKey, TValue> provider, AutoSavePreference autoSavePreference)
+    public SettingsFile(string filePath, ISettingsProvider<TKey, TValue> provider, SavePreference autoSavePreference)
     {
         FilePath = filePath;
         SettingsProvider = provider;
@@ -160,5 +164,32 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     public void SaveFile()
     {
         SettingsProvider.WriteToFile(Get(), FilePath);
+    }
+
+    /// <summary>
+    /// Move the Settings File to a new location.
+    /// </summary>
+    /// <param name="newPath">The path where the File should be moved to.</param>
+    public void MoveFile(string newPath)
+    {
+      File.Move(FilePath, newPath);
+      FilePath = newPath;
+    }
+
+    /// <summary>
+    /// Makes a copy of the Settings File to a specified location.
+    /// </summary>
+    /// <param name="pathToCopyTo">The path where the File should be copied to.</param>
+    public void CopyFile(string pathToCopyTo)
+    {
+        File.Copy(FilePath, pathToCopyTo);
+    }
+
+    /// <summary>
+    /// Deletes the file.
+    /// </summary>
+    public void DeleteFile()
+    {
+        File.Delete(FilePath);
     }
 }

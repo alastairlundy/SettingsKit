@@ -24,18 +24,24 @@ SOFTWARE.
 
 using AlastairLundy.SettingsKit.enums;
 
-namespace AlastairLundy.SettingsKit.AutoSaving
+namespace AlastairLundy.SettingsKit
 {
-    public class AutoSavePreference
+    public class SavePreference
     {
         public SettingsSavingMode SavingMode { get; set; }
         
         public double AutoSaveFrequencyMinutes { get; set; }
 
-        public AutoSavePreference()
+        public SavePreference()
         {
-            AutoSaveFrequencyMinutes = 5;
+            AutoSaveFrequencyMinutes = 0;
             SavingMode = SettingsSavingMode.SaveAfterEveryChange;
+        }
+
+        public SavePreference(SettingsSavingMode mode, double autoSaveFrequencyMinutes)
+        {
+            AutoSaveFrequencyMinutes = autoSaveFrequencyMinutes;
+            SavingMode = mode;
         }
     }
 }
