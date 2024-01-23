@@ -49,15 +49,15 @@ public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey,
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<TKey, TValue>>));
 
-            KeyValuePair<TKey, TValue>[] i;
+            KeyValuePair<TKey, TValue>[] pairs;
             
             using (Stream reader = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
             {
                 // Call the Deserialize method to restore the object's state.
-                i = (KeyValuePair<TKey, TValue>[])xmlSerializer.Deserialize(reader);
+                pairs = (KeyValuePair<TKey, TValue>[])xmlSerializer.Deserialize(reader);
             }
 
-            return i;
+            return pairs;
         }
         catch (Exception exception)
         {
