@@ -26,14 +26,14 @@ using System.Collections.Generic;
 
 namespace AlastairLundy.SettingsKit.Providers;
 
-public class ResourceSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey, TValue>
+public class ResourceSettingsFileProvider<TValue> : ISettingsFileProvider2<TValue>
 {
-    public KeyValuePair<TKey, TValue>[] Get(string pathToFile)
+    public KeyValuePair<string, TValue>[] Get(string pathToFile)
     {
-        throw new System.NotImplementedException();
+            throw new System.NotImplementedException();
     }
 
-    public void WriteToFile(KeyValuePair<TKey, TValue>[] data, string pathToFile)
+    public void WriteToFile(KeyValuePair<string, TValue>[] data, string pathToFile)
     {
         throw new System.NotImplementedException();
     }
