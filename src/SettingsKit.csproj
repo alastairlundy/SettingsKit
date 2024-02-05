@@ -5,35 +5,23 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>SettingsKit</Title>
         <Authors>AlastairLundy</Authors>
-        <Copyright>Copyright (c) AlastairLundy 2021-2023</Copyright>
+        <Copyright>Copyright (c) AlastairLundy 2021-2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>## Changes since 4.0.0
-
-### Additions
-* Initial experimental support for saving and writing Settings as an XML file.
-* Added ability to correct an issue that may arise with Key and Value declarations.
-* Added missing copyright notices
-* Created ISettingsFile&lt;TKey, TValue&gt; Interface
-* Created SettingsFile&lt;TKey, TValue&gt; Class
-
-### Changes
- * Rename SettingsAutoSavingInformation to AutoSavePreference
-*  Significantly revamped SettingsManager to be have a less important role than before with fewer methods.
-* Namespaces changes
-* Class name changes
-* Improved exception checking</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 5.0.0
+* Deprecated ``ISettingsFileProvider``. New File Providers should use ``ISettingsFileProvider2`` instead. - ``ISettingsFileProvider`` will be removed in SettingsKit 6.0
+* Added ``ISettingsFileProvider2`` - The main difference between this and ISettingsFileProvider [1] is that the keys must be Strings with ISettingsFileProvider2 </PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>A library to make managing JSON based Settings files easier for .NET .</Description>
-        <Version>5.0.0</Version>
-      <PackageVersion>5.0.0</PackageVersion>
+        <Version>5.0.1</Version>
+      <PackageVersion>5.0.1</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
-        <FileVersion>5.0.0.0</FileVersion>
+        <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <FileVersion>5.0.1.0</FileVersion>
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
