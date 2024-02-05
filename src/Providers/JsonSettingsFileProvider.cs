@@ -25,6 +25,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 
 namespace SettingsKit.Providers
@@ -35,7 +36,7 @@ namespace SettingsKit.Providers
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     // ReSharper disable once UnusedType.Global
-    public class JsonSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey, TValue>
+    public class JsonSettingsFileProvider<TKey, TValue> : ISettingsFileProvider2<TValue>
     {
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
 
@@ -44,7 +45,7 @@ namespace SettingsKit.Providers
         /// </summary>
         /// <param name="pathToJsonFile"></param>
         /// <exception cref="Exception"></exception>
-        public KeyValuePair<TKey, TValue>[] Get(string pathToJsonFile)
+        public KeyValuePair<string, TValue>[] Get(string pathToJsonFile)
         {
             try
             {
@@ -60,9 +61,16 @@ namespace SettingsKit.Providers
                     json = json.Replace("value:", "Value:");
                 }
 
-                List<KeyValuePair<TKey, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<TKey, TValue>>>(json);
-                
-                return deserializeObject.ToArray();
+                List<KeyValuePair<string, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<string, TValue>>>(json);
+
+                if (deserializeObject != null)
+                {
+                    return deserializeObject.ToArray();
+                }
+                else
+                {
+                    throw new NullReferenceException();
+                }
             }
             catch(Exception exception)
             {
@@ -76,17 +84,36 @@ namespace SettingsKit.Providers
         /// </summary>
         /// <param name="data"></param>
         /// <param name="pathToJsonFile"></param>
-        public void WriteToFile(KeyValuePair<TKey, TValue>[] data, string pathToJsonFile)
+        public void WriteToFile(KeyValuePair<string, TValue>[] data, string pathToJsonFile)
         {
             try
             {
-                string contents = JsonSerializer.Serialize(data);
+                StringBuilder stringBuilder = new StringBuilder();
 
-                #if DEBUG
-                    Console.WriteLine(contents);
-                #endif
+                stringBuilder.Append('{');
+                stringBuilder.AppendLine();
+            
+                foreach (var pair in data)
+                {
+                    stringBuilder.Append('"');
+                    stringBuilder.Append(pair.Key);
+                    stringBuilder.Append('"');
+                
+                    stringBuilder.Append(' ');
+                    stringBuilder.Append(':');
+                    stringBuilder.Append(' ');
 
-                File.WriteAllText(pathToJsonFile, contents);
+                    stringBuilder.Append('"');
+                    stringBuilder.Append(pair.Value);
+                    stringBuilder.Append('"');
+                    stringBuilder.Append(',');
+                    stringBuilder.AppendLine();
+                }
+
+                stringBuilder.Append('}');
+                stringBuilder.AppendLine();
+            
+                File.WriteAllText(pathToJsonFile, stringBuilder.ToString());
             }
             catch (Exception exception)
             {

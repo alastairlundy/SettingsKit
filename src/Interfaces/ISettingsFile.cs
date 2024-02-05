@@ -28,7 +28,7 @@ namespace SettingsKit;
 
 public interface ISettingsFile<TKey, TValue>
 {
-    public ISettingsFileProvider<TKey, TValue> SettingsProvider { get; }
+    public ISettingsFileProvider2<TValue> SettingsProvider { get; }
 
     public void Add(KeyValuePair<TKey, TValue> pair);
 

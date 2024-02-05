@@ -25,7 +25,6 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace SettingsKit.Providers;
@@ -35,7 +34,7 @@ namespace SettingsKit.Providers;
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
-public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey, TValue>
+public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider2<TValue>
 {
 
     /// <summary>
@@ -43,21 +42,28 @@ public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey,
     /// </summary>
     /// <param name="pathToFile"></param>
     /// <returns></returns>
-    public KeyValuePair<TKey, TValue>[] Get(string pathToFile)
+    public KeyValuePair<string, TValue>[] Get(string pathToFile)
     {
         try
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<TKey, TValue>>));
 
-            KeyValuePair<TKey, TValue>[] pairs;
+            KeyValuePair<string, TValue>[] pairs;
             
             using (Stream reader = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
             {
                 // Call the Deserialize method to restore the object's state.
-                pairs = (KeyValuePair<TKey, TValue>[])xmlSerializer.Deserialize(reader);
+                pairs = (KeyValuePair<string, TValue>[])xmlSerializer.Deserialize(reader);
             }
 
-            return pairs;
+            if (pairs != null)
+            {
+                return pairs;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
         catch (Exception exception)
         {
@@ -71,13 +77,13 @@ public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider<TKey,
     /// </summary>
     /// <param name="data"></param>
     /// <param name="pathToFile"></param>
-    public void WriteToFile(KeyValuePair<TKey, TValue>[] data, string pathToFile)
+    public void WriteToFile(KeyValuePair<string, TValue>[] data, string pathToFile)
     {
         try
         {
             FileStream fileStream = new FileStream(pathToFile, FileMode.Create);
             
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<TKey, TValue>>));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<string, TValue>>));
             xmlSerializer.Serialize(fileStream, data);
         }
         catch (Exception exception)
