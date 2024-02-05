@@ -22,10 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace AlastairLundy.SettingsKit;
 
+[Obsolete("This interface is obsolete and will be removed in a future version. Please use the ISettingsFileProvider2 interface instead.")]
 public interface ISettingsFileProvider<TKey, TValue>
 {
     KeyValuePair<TKey, TValue>[] Get(string pathToFile);
