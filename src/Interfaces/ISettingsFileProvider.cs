@@ -24,7 +24,7 @@ SOFTWARE.
 
 using System.Collections.Generic;
 
-namespace AlastairLundy.SettingsKit;
+namespace SettingsKit;
 
 public interface ISettingsFileProvider<TKey, TValue>
 {

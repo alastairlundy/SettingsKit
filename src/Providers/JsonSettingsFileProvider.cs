@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace AlastairLundy.SettingsKit.Providers
+namespace SettingsKit.Providers
 {
     /// <summary>
     /// A class to read and write Settings to JSON files.

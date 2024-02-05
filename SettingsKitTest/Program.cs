@@ -25,8 +25,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
-using AlastairLundy.SettingsKit;
-using AlastairLundy.SettingsKit.Providers;
+using SettingsKit.Providers;
 
 namespace SettingsKitTest
 {

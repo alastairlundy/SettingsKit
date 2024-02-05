@@ -25,7 +25,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 
-namespace AlastairLundy.SettingsKit;
+namespace SettingsKit;
 
 /// <summary>
 /// A class to make managing Settings Files easier.

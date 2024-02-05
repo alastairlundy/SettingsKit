@@ -25,10 +25,11 @@ SOFTWARE.
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
-using AlastairLundy.SettingsKit.enums;
+using SettingsKit.enums;
+
 // ReSharper disable InconsistentNaming
 
-namespace AlastairLundy.SettingsKit;
+namespace SettingsKit;
 
 /// <summary>
 /// A class to represent and help manage a logical representation of a Settings File.

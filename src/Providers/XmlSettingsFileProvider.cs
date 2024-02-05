@@ -28,7 +28,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace AlastairLundy.SettingsKit.Providers;
+namespace SettingsKit.Providers;
 
 /// <summary>
 /// A class to read and write Settings to XML files.

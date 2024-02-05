@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>AlastairLundy.SettingsKit</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>SettingsKit</Title>
         <Authors>AlastairLundy</Authors>
