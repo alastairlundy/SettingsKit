@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
-using SettingsKit.enums;
 
 namespace SettingsKit;
+using AlastairLundy.SettingsKit;
+using AlastairLundy.SettingsKit.enums;
+
 
 public class SettingsFile2<TValue> : ISettingsFile2<TValue>
 {
