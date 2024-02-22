@@ -10,7 +10,7 @@ namespace AlastairLundy.SettingsKit;
 
 public class SettingsFile2<TValue> : ISettingsFile2<TValue>
 {
-        internal List<KeyValuePair<string, TValue>> KeyValuePairs { get; set; }
+    internal List<KeyValuePair<string, TValue>> KeyValuePairs { get; set; }
     
     public ISettingsFileProvider2<TValue> SettingsProvider { get; }
     
