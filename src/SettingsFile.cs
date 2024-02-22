@@ -149,9 +149,16 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     {
         foreach (var pair in KeyValuePairs)
         {
-            if (pair.Key.Equals(key))
+            if (pair.Key == null || pair.Value == null)
             {
-                return pair.Value;
+                throw new NullReferenceException();
+            }
+            else
+            {
+                if (pair.Key.Equals(key))
+                {
+                    return pair.Value;
+                }
             }
         }
 
