@@ -33,10 +33,9 @@ namespace SettingsKit.Providers
     /// <summary>
     /// A class to read and write Settings to JSON files.
     /// </summary>
-    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     // ReSharper disable once UnusedType.Global
-    public class JsonSettingsFileProvider<TKey, TValue> : ISettingsFileProvider2<TValue>
+    public class JsonSettingsFileProvider<TValue> : ISettingsFileProvider<TValue>
     {
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
 
@@ -61,16 +60,9 @@ namespace SettingsKit.Providers
                     json = json.Replace("value:", "Value:");
                 }
 
-                List<KeyValuePair<string, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<string, TValue>>>(json);
-
-                if (deserializeObject != null)
-                {
-                    return deserializeObject.ToArray();
-                }
-                else
-                {
-                    throw new NullReferenceException();
-                }
+                List<KeyValuePair<string, TValue>> deserializeObject = JsonSerializer.Deserialize<List<KeyValuePair<string, TValue>>>(json) ?? throw new NullReferenceException();
+                
+                return deserializeObject.ToArray();
             }
             catch(Exception exception)
             {

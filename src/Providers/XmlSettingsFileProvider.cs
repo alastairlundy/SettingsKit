@@ -34,7 +34,7 @@ namespace SettingsKit.Providers;
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
-public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider2<TValue>
+public class XmlSettingsFileProvider<TValue> : ISettingsFileProvider<TValue>
 {
 
     /// <summary>
@@ -46,7 +46,7 @@ public class XmlSettingsFileProvider<TKey, TValue> : ISettingsFileProvider2<TVal
     {
         try
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<TKey, TValue>>));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<string, TValue>>));
 
             KeyValuePair<string, TValue>[] pairs;
             
