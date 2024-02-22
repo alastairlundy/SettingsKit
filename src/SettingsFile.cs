@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
-using SettingsKit.enums;
 
-// ReSharper disable InconsistentNaming
+using SettingsKit.enums;
 
 namespace SettingsKit;
 
@@ -36,11 +36,11 @@ namespace SettingsKit;
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
-public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
+public class SettingsFile<TValue> : ISettingsFile<TValue>
 {
-    internal List<KeyValuePair<TKey, TValue>> KeyValuePairs { get; set; }
+    internal List<KeyValuePair<string, TValue>> KeyValuePairs { get; set; }
     
-    public ISettingsFileProvider<TKey, TValue> SettingsProvider { get; }
+    public ISettingsFileProvider<TValue> SettingsProvider { get; }
     
     public string FilePath { get; set; }
 
@@ -55,12 +55,12 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// </summary>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
-    public SettingsFile(string filePath, ISettingsFileProvider<TKey, TValue> provider)
+    public SettingsFile(string filePath, ISettingsFileProvider<TValue> provider)
     {
         FilePath = filePath;
         SettingsProvider = provider;
         _timer = new Timer();
-        KeyValuePairs = new List<KeyValuePair<TKey, TValue>>();
+        KeyValuePairs = new List<KeyValuePair<string, TValue>>();
         Preference = new SavePreference();
         Preference.SavingMode = SettingsSavingMode.SaveManuallyOnly;
 
@@ -74,12 +74,12 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
     /// <param name="autoSavePreference">The AutoSave preference to use.</param>
-    public SettingsFile(string filePath, ISettingsFileProvider<TKey, TValue> provider, SavePreference autoSavePreference)
+    public SettingsFile(string filePath, ISettingsFileProvider<TValue> provider, SavePreference autoSavePreference)
     {
         FilePath = filePath;
         SettingsProvider = provider;
         _timer = new Timer();
-        KeyValuePairs = new List<KeyValuePair<TKey, TValue>>();
+        KeyValuePairs = new List<KeyValuePair<string, TValue>>();
         Preference = autoSavePreference;
 
         if (Preference.SavingMode == SettingsSavingMode.AutoSaveAfterTimeMinutes)
@@ -101,7 +101,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// Add a KeyValuePair to the list of KeyValuePairs.
     /// </summary>
     /// <param name="pair"></param>
-    public void Add(KeyValuePair<TKey, TValue> pair)
+    public void Add(KeyValuePair<string, TValue> pair)
     {
         switch (Preference.SavingMode)
         {
@@ -119,7 +119,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// Remove a KeyValuePair from the list of KeyValuePairs.
     /// </summary>
     /// <param name="pair"></param>
-    public void Remove(KeyValuePair<TKey, TValue> pair)
+    public void Remove(KeyValuePair<string, TValue> pair)
     {
         switch (Preference.SavingMode)
         {
@@ -137,7 +137,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// Return an Array of KeyValuePairs.
     /// </summary>
     /// <returns></returns>
-    public KeyValuePair<TKey, TValue>[] Get()
+    public KeyValuePair<string, TValue>[] Get()
     {
         return KeyValuePairs.ToArray();
     }
@@ -148,13 +148,20 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// <param name="key">The specified Key</param>
     /// <returns></returns>
     /// <exception cref="KeyNotFoundException"></exception>
-    public TValue Get(TKey key)
+    public TValue Get(string key)
     {
         foreach (var pair in KeyValuePairs)
         {
-            if (pair.Key.Equals(key))
+            if (pair.Key == null || pair.Value == null)
             {
-                return pair.Value;
+                throw new NullReferenceException();
+            }
+            else
+            {
+                if (pair.Key.Equals(key))
+                {
+                    return pair.Value;
+                }
             }
         }
 
