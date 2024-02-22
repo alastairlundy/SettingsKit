@@ -27,7 +27,7 @@ using System.Collections.Generic;
 
 namespace AlastairLundy.SettingsKit;
 
-[Obsolete("This interface is obsolete and will be removed in a future version. Please use the ISettingsFile2 interface instead.")]
+[Obsolete("This interface is obsolete and will be updated with breaking changes in a future version.")]
 public interface ISettingsFile<TKey, TValue>
 {
     public ISettingsFileProvider<TKey, TValue> SettingsProvider { get; }

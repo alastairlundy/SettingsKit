@@ -36,6 +36,7 @@ namespace AlastairLundy.SettingsKit;
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
+[Obsolete("This class is obsolete and will be updated with breaking changes in a future version.")]
 public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
 {
     internal List<KeyValuePair<TKey, TValue>> KeyValuePairs { get; set; }
