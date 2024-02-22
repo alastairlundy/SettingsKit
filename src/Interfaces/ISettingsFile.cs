@@ -26,16 +26,14 @@ using System.Collections.Generic;
 
 namespace SettingsKit;
 
-public interface ISettingsFile<TKey, TValue>
+public interface ISettingsFile<TValue>
 {
-    public ISettingsFileProvider<TKey, TValue> SettingsProvider { get; }
+    public ISettingsFileProvider<TValue> SettingsProvider { get; }
 
-    public void Add(KeyValuePair<TKey, TValue> pair);
+    public void Add(KeyValuePair<string, TValue> pair);
 
-    public void Remove(KeyValuePair<TKey, TValue> pair);
+    public void Remove(KeyValuePair<string, TValue> pair);
 
-    public KeyValuePair<TKey, TValue>[] Get();
-    public TValue Get(TKey key);
-
-    internal void SaveFile();
+    public KeyValuePair<string, TValue>[] Get();
+    public TValue Get(string key);
 }
