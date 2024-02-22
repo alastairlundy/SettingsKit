@@ -30,9 +30,8 @@ namespace SettingsKit;
 /// <summary>
 /// A class to make managing Settings Files easier.
 /// </summary>
-/// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
-public class SettingsManager<TKey, TValue>
+public class SettingsManager<TValue>
 {
 
     /// <summary>
@@ -42,7 +41,7 @@ public class SettingsManager<TKey, TValue>
     /// <param name="key"></param>
     /// <returns></returns>
     /// <exception cref="KeyNotFoundException"></exception>
-    public KeyValuePair<TKey, TValue> GetKeyValuePair(KeyValuePair<TKey, TValue>[] array, TKey key)
+    public KeyValuePair<string, TValue> GetKeyValuePair(KeyValuePair<string, TValue>[] array, string key)
     {
         try
         {
