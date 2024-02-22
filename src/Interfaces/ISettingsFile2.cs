@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SettingsKit;
+namespace AlastairLundy.SettingsKit;
 
 public interface ISettingsFile2<TValue>
 {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Timers;
 
-namespace SettingsKit;
 using AlastairLundy.SettingsKit;
 using AlastairLundy.SettingsKit.enums;
 
+namespace AlastairLundy.SettingsKit;
 
 public class SettingsFile2<TValue> : ISettingsFile2<TValue>
 {
