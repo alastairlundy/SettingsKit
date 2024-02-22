@@ -37,7 +37,7 @@ namespace SettingsKitTest
 
             string path = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Testing.json";
 
-            JsonSettingsFileProvider<string, string> settingsProvider = new JsonSettingsFileProvider<string, string>();
+            JsonSettingsFileProvider<string> settingsProvider = new JsonSettingsFileProvider<string>();
 
             var settings = settingsProvider.Get(path);
             
