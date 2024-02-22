@@ -40,7 +40,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
 {
     internal List<KeyValuePair<TKey, TValue>> KeyValuePairs { get; set; }
     
-    public ISettingsFileProvider2<TValue> SettingsProvider { get; }
+    public ISettingsFileProvider<TKey, TValue> SettingsProvider { get; }
     
     public string FilePath { get; set; }
 
@@ -55,7 +55,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// </summary>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
-    public SettingsFile(string filePath, ISettingsFileProvider2<TValue> provider)
+    public SettingsFile(string filePath, ISettingsFileProvider<TKey, TValue> provider)
     {
         FilePath = filePath;
         SettingsProvider = provider;
@@ -74,7 +74,7 @@ public class SettingsFile<TKey, TValue> : ISettingsFile<TKey, TValue>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
     /// <param name="autoSavePreference">The AutoSave preference to use.</param>
-    public SettingsFile(string filePath, ISettingsFileProvider2<TValue> provider, SavePreference autoSavePreference)
+    public SettingsFile(string filePath, ISettingsFileProvider<TKey, TValue> provider, SavePreference autoSavePreference)
     {
         FilePath = filePath;
         SettingsProvider = provider;
