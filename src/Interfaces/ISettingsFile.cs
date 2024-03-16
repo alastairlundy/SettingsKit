@@ -34,6 +34,6 @@ public interface ISettingsFile<TValue>
 
     public void Remove(KeyValuePair<string, TValue> pair);
 
-    public KeyValuePair<string, TValue>[] Get();
+    public Dictionary<string, TValue> Get();
     public TValue Get(string key);
 }

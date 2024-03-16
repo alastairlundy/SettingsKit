@@ -25,6 +25,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Timers;
 
 using SettingsKit.enums;
@@ -38,7 +39,7 @@ namespace SettingsKit;
 /// <typeparam name="TValue"></typeparam>
 public class SettingsFile<TValue> : ISettingsFile<TValue>
 {
-    internal List<KeyValuePair<string, TValue>> KeyValuePairs { get; set; }
+    internal Dictionary<string, TValue> Settings { get; set; }
     
     public ISettingsFileProvider<TValue> SettingsProvider { get; }
     
@@ -60,7 +61,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
         FilePath = filePath;
         SettingsProvider = provider;
         _timer = new Timer();
-        KeyValuePairs = new List<KeyValuePair<string, TValue>>();
+        Settings = new Dictionary<string, TValue>();
         Preference = new SavePreference();
         Preference.SavingMode = SettingsSavingMode.SaveManuallyOnly;
 
@@ -79,7 +80,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
         FilePath = filePath;
         SettingsProvider = provider;
         _timer = new Timer();
-        KeyValuePairs = new List<KeyValuePair<string, TValue>>();
+        Settings = new Dictionary<string, TValue>();
         Preference = autoSavePreference;
 
         if (Preference.SavingMode == SettingsSavingMode.AutoSaveAfterTimeMinutes)
@@ -106,10 +107,10 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
         switch (Preference.SavingMode)
         {
             case SettingsSavingMode.SaveManuallyOnly or SettingsSavingMode.AutoSaveAfterTimeMinutes:
-                KeyValuePairs.Add(pair);
+                Settings.Add(pair.Key, pair.Value);
                 break;
             case SettingsSavingMode.SaveAfterEveryChange:
-                KeyValuePairs.Add(pair);
+                Settings.Add(pair.Key, pair.Value);
                 SaveFile();
                 break;
         }
@@ -124,10 +125,10 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
         switch (Preference.SavingMode)
         {
             case SettingsSavingMode.SaveManuallyOnly or SettingsSavingMode.AutoSaveAfterTimeMinutes:
-                KeyValuePairs.Remove(pair);
+                Settings.Remove(pair.Key);
                 break;
             case SettingsSavingMode.SaveAfterEveryChange:
-                KeyValuePairs.Remove(pair);
+                Settings.Remove(pair.Key);
                 SaveFile();
                 break;
         }
@@ -137,9 +138,9 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// Return an Array of KeyValuePairs.
     /// </summary>
     /// <returns></returns>
-    public KeyValuePair<string, TValue>[] Get()
+    public Dictionary<string, TValue> Get()
     {
-        return KeyValuePairs.ToArray();
+        return Settings;
     }
 
     /// <summary>
@@ -150,7 +151,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// <exception cref="KeyNotFoundException"></exception>
     public TValue Get(string key)
     {
-        foreach (var pair in KeyValuePairs)
+        foreach (var pair in Settings)
         {
             if (pair.Key == null || pair.Value == null)
             {
@@ -173,7 +174,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// </summary>
     public void SaveFile()
     {
-        SettingsProvider.WriteToFile(Get(), FilePath);
+        SettingsProvider.WriteToFile(Get().ToArray(), FilePath);
     }
 
     /// <summary>
