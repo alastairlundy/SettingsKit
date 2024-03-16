@@ -25,7 +25,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
-using SettingsKit.Providers;
+using LocalizationKit.Providers;
 
 namespace SettingsKitTest
 {
@@ -37,8 +37,8 @@ namespace SettingsKitTest
 
             string path = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Testing.json";
 
-            JsonSettingsFileProvider<string> settingsProvider = new JsonSettingsFileProvider<string>();
-
+            JsonLocalizationFileProvider settingsProvider = new JsonLocalizationFileProvider();
+            
             var settings = settingsProvider.Get(path);
             
         }

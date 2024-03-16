@@ -23,17 +23,18 @@ SOFTWARE.
 */
 
 using System.Collections.Generic;
+using LocalizationKit.Interfaces;
 
 namespace SettingsKit;
 
-public interface ISettingsFile<TValue>
+public interface ISettingsFile
 {
-    public ISettingsFileProvider<TValue> SettingsProvider { get; }
+    public ILocalizationFileProvider SettingsProvider { get; }
 
-    public void Add(KeyValuePair<string, TValue> pair);
+    public void Add(KeyValuePair<string, string> pair);
 
-    public void Remove(KeyValuePair<string, TValue> pair);
+    public void Remove(KeyValuePair<string, string> pair);
 
-    public Dictionary<string, TValue> Get();
-    public TValue Get(string key);
+    public Dictionary<string, string> Get();
+    public string Get(string key);
 }

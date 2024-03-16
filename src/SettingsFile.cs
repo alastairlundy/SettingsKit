@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Timers;
-
+using LocalizationKit.Interfaces;
 using SettingsKit.enums;
 
 namespace SettingsKit;
@@ -35,13 +35,11 @@ namespace SettingsKit;
 /// <summary>
 /// A class to represent and help manage a logical representation of a Settings File.
 /// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="TValue"></typeparam>
-public class SettingsFile<TValue> : ISettingsFile<TValue>
+public class SettingsFile : ISettingsFile
 {
-    internal Dictionary<string, TValue> Settings { get; set; }
+    internal Dictionary<string, string> Settings { get; set; }
     
-    public ISettingsFileProvider<TValue> SettingsProvider { get; }
+    public ILocalizationFileProvider SettingsProvider { get; }
     
     public string FilePath { get; set; }
 
@@ -56,12 +54,12 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// </summary>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
-    public SettingsFile(string filePath, ISettingsFileProvider<TValue> provider)
+    public SettingsFile(string filePath, ILocalizationFileProvider provider)
     {
         FilePath = filePath;
         SettingsProvider = provider;
         _timer = new Timer();
-        Settings = new Dictionary<string, TValue>();
+        Settings = new Dictionary<string, string>();
         Preference = new SavePreference();
         Preference.SavingMode = SettingsSavingMode.SaveManuallyOnly;
 
@@ -75,12 +73,12 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
     /// <param name="autoSavePreference">The AutoSave preference to use.</param>
-    public SettingsFile(string filePath, ISettingsFileProvider<TValue> provider, SavePreference autoSavePreference)
+    public SettingsFile(string filePath, ILocalizationFileProvider provider, SavePreference autoSavePreference)
     {
         FilePath = filePath;
         SettingsProvider = provider;
         _timer = new Timer();
-        Settings = new Dictionary<string, TValue>();
+        Settings = new Dictionary<string, string>();
         Preference = autoSavePreference;
 
         if (Preference.SavingMode == SettingsSavingMode.AutoSaveAfterTimeMinutes)
@@ -102,7 +100,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// Add a KeyValuePair to the list of KeyValuePairs.
     /// </summary>
     /// <param name="pair"></param>
-    public void Add(KeyValuePair<string, TValue> pair)
+    public void Add(KeyValuePair<string, string> pair)
     {
         switch (Preference.SavingMode)
         {
@@ -120,7 +118,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// Remove a KeyValuePair from the list of KeyValuePairs.
     /// </summary>
     /// <param name="pair"></param>
-    public void Remove(KeyValuePair<string, TValue> pair)
+    public void Remove(KeyValuePair<string, string> pair)
     {
         switch (Preference.SavingMode)
         {
@@ -138,7 +136,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// Return an Array of KeyValuePairs.
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, TValue> Get()
+    public Dictionary<string, string> Get()
     {
         return Settings;
     }
@@ -149,7 +147,7 @@ public class SettingsFile<TValue> : ISettingsFile<TValue>
     /// <param name="key">The specified Key</param>
     /// <returns></returns>
     /// <exception cref="KeyNotFoundException"></exception>
-    public TValue Get(string key)
+    public string Get(string key)
     {
         foreach (var pair in Settings)
         {
