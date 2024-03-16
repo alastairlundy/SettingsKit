@@ -7,34 +7,18 @@
         <Copyright>Copyright (c) AlastairLundy 2021-2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>## Changes since 4.0.0
-
-### Additions
-* Initial experimental support for saving and writing Settings as an XML file.
-* Added ability to correct an issue that may arise with Key and Value declarations.
-* Added missing copyright notices
-* Created ISettingsFile&lt;TKey, TValue&gt; Interface
-* Created SettingsFile&lt;TKey, TValue&gt; Class
-### Changes since 5.1.x series
-* Replaced ISettingsFile code with ISettingsFile2 code
-* Replaced ISettingsFileProvider code with ISettingsFileProvider2 code
-* Replaced SettingsFile code with SettingsFile2 code
-* Updated JsonSettingsFileProvider to use ISettingsFileProvider2 based code
-* Updated XmlSettingsFileProvider to use ISettingsFileProvider2 based code
-* Updated SettingsManager to reflect changes in interfaces
-### Changes
- * Rename SettingsAutoSavingInformation to AutoSavePreference
-*  Significantly revamped SettingsManager to be have a less important role than before with fewer methods.
-* Namespaces changes
-* Class name changes
-* Improved exception checking</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 6.0.0 Alpha 1
+* New dependency on LocalizationKit 6.0.0 Beta 1
+* Removed SettingsFileProviders and ``ISettingsFileProvider``
+* Switch to using LocalizationFileProviders
+* Switched ``KeyValuePair&lt;string, string&gt;[]`` arrays to ``Dictionary&lt;string, strring&gt;`` objects</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>A library to make managing Settings files easier for .NET projects.</Description>
         <Version>6.0.0</Version>
-      <PackageVersion>6.0.0-alpha.1</PackageVersion>
+      <PackageVersion>6.0.0-alpha.2</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
