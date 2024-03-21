@@ -8,23 +8,22 @@
         <Copyright>Copyright (c) AlastairLundy 2021-2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 5.0.1
-* Deprecated original ISettingsFile code - This will be changed to ISettingsFile2's current code in 6.0
-* Added ISettingsFile2 - The code in this interface will eventually replace ISettingsFile but keep the original ISettingsFile name
-* Added SettingsFile2 - The code in this class will eventually replace SettingsFile but keep the original SettingsFile name
-* Added Null reference check in a SettingsFile method
-* Updated prior deprecation warnings</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 5.1.0
+* Deprecated the ``SettingsManager&lt;TKey, TValue&gt;`` class - This class will be removed with SettingsKit 6
+
+### Notes
+* Final update for SettingsKit 5.1.x series</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>A library to make managing Settings files easier in .NET .</Description>
-        <Version>5.1.0</Version>
-      <PackageVersion>5.1.0</PackageVersion>
+        <Version>5.1.0.1</Version>
+      <PackageVersion>5.1.0.1</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
-        <AssemblyVersion>5.1.0.0</AssemblyVersion>
-        <FileVersion>5.1.0.0</FileVersion>
+        <AssemblyVersion>5.1.0.1</AssemblyVersion>
+        <FileVersion>5.1.0.1</FileVersion>
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
