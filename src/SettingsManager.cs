@@ -32,6 +32,7 @@ namespace AlastairLundy.SettingsKit;
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
+[Obsolete("This class is deprecated and will be removed in a future version.")]
 public class SettingsManager<TKey, TValue>
 {
 
