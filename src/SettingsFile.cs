@@ -37,16 +37,16 @@ namespace SettingsKit;
 /// </summary>
 public class SettingsFile : ISettingsFile
 {
-    internal Dictionary<string, string> Settings { get; set; }
+    protected Dictionary<string, string> Settings { get; set; }
     
-    public ILocalizationFileProvider SettingsProvider { get; }
+    public ILocalizationFileProvider SettingsProvider { get; protected set; }
     
-    public string FilePath { get; set; }
+    public string FilePath { get; protected set; }
 
 
     private System.Timers.Timer _timer;
     
-    public SavePreference Preference { get;  }
+    public SavePreference Preference { get; protected set; }
 
     
     /// <summary>
@@ -77,6 +77,7 @@ public class SettingsFile : ISettingsFile
     {
         FilePath = filePath;
         SettingsProvider = provider;
+        
         _timer = new Timer();
         Settings = new Dictionary<string, string>();
         Preference = autoSavePreference;
@@ -155,12 +156,10 @@ public class SettingsFile : ISettingsFile
             {
                 throw new NullReferenceException();
             }
-            else
+
+            if (pair.Key.Equals(key))
             {
-                if (pair.Key.Equals(key))
-                {
-                    return pair.Value;
-                }
+                return pair.Value;
             }
         }
 
