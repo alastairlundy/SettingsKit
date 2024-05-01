@@ -27,8 +27,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Timers;
+
 using LocalizationKit.Interfaces;
-using SettingsKit.enums;
+
+using SettingsKit.Enums;
 
 namespace SettingsKit;
 
