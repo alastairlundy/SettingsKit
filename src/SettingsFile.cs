@@ -46,7 +46,7 @@ public class SettingsFile : ISettingsFile
     public string FilePath { get; protected set; }
 
 
-    private System.Timers.Timer _timer;
+    protected System.Timers.Timer timer;
     
     public SavePreference Preference { get; protected set; }
 
@@ -60,12 +60,12 @@ public class SettingsFile : ISettingsFile
     {
         FilePath = filePath;
         SettingsProvider = provider;
-        _timer = new Timer();
+        timer = new Timer();
         Settings = new Dictionary<string, string>();
         Preference = new SavePreference();
         Preference.SavingMode = SettingsSavingMode.SaveManuallyOnly;
 
-        _timer.Enabled = false;
+        timer.Enabled = false;
     }
     
 
@@ -80,17 +80,17 @@ public class SettingsFile : ISettingsFile
         FilePath = filePath;
         SettingsProvider = provider;
         
-        _timer = new Timer();
+        timer = new Timer();
         Settings = new Dictionary<string, string>();
         Preference = autoSavePreference;
 
         if (Preference.SavingMode == SettingsSavingMode.AutoSaveAfterTimeMinutes)
         {
-            _timer.Enabled = true;
-            _timer.Interval = (Preference.AutoSaveFrequencyMinutes * 60) * 1000;
-            _timer.Start();
+            timer.Enabled = true;
+            timer.Interval = (Preference.AutoSaveFrequencyMinutes * 60) * 1000;
+            timer.Start();
             
-            _timer.Elapsed += TimerOnElapsed;
+            timer.Elapsed += TimerOnElapsed;
         }
     }
 
