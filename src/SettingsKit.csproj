@@ -37,7 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="LocalizationKit" Version="6.0.0-rc.1" />
+      <PackageReference Include="LocalizationKit" Version="6.*" />
     </ItemGroup>
 
 </Project>
