@@ -94,7 +94,7 @@ public class SettingsFile : ISettingsFile
         }
     }
 
-    private void TimerOnElapsed(object sender, ElapsedEventArgs e)
+    private void TimerOnElapsed(object? sender, ElapsedEventArgs e)
     {
         SaveFile();
     }
