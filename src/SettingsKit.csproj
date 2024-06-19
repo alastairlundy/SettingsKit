@@ -7,18 +7,17 @@
         <Copyright>Copyright (c) AlastairLundy 2021-2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/SettingsKit/</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 6.0.0 Alpha 2
-* Updated LocalizationKit dependency from 6.0.0 Beta 1 to 6.0.0 Beta 3
-* Removed SettingsManager
-* Minor property changes in SettingsFile class.
-* Re-add .NET Standard 2 support</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 6.0.0 Beta 1
+* Rename ``Enums`` namespace
+* Changed LocalizationKit dependency to floating 6.x version
+* Renamed some methods</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <AssemblyName>SettingsKit</AssemblyName>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>A library to make managing Settings files easier for .NET projects.</Description>
         <Version>6.0.0</Version>
-      <PackageVersion>6.0.0-beta.1</PackageVersion>
+      <PackageVersion>6.0.0-beta.2</PackageVersion>
         <Product>SettingsKit</Product>
         <LangVersion>latest</LangVersion>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
