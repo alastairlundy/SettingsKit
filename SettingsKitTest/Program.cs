@@ -35,7 +35,7 @@ namespace SettingsKitTest
         {
             Console.WriteLine("Hello World!");
 
-            string path = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Testing.json";
+            string path = $"{Environment.CurrentDirectory}{Path.DirectorySeparatorChar}Testing.json";
 
             JsonLocalizationFileProvider settingsProvider = new JsonLocalizationFileProvider();
             
