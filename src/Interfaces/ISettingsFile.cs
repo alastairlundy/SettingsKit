@@ -31,10 +31,10 @@ public interface ISettingsFile
 {
     public ILocalizationFileProvider SettingsProvider { get; }
 
-    public void Add(KeyValuePair<string, string> pair);
+    public void AddValue(KeyValuePair<string, string> pair);
 
-    public void Remove(KeyValuePair<string, string> pair);
+    public void RemoveValue(KeyValuePair<string, string> pair);
 
-    public Dictionary<string, string> Get();
-    public string Get(string key);
+    public Dictionary<string, string> GetValues();
+    public string GetValue(string key);
 }

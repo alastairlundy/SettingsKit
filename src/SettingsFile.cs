@@ -103,7 +103,7 @@ public class SettingsFile : ISettingsFile
     /// Add a KeyValuePair to the list of KeyValuePairs.
     /// </summary>
     /// <param name="pair"></param>
-    public void Add(KeyValuePair<string, string> pair)
+    public void AddValue(KeyValuePair<string, string> pair)
     {
         switch (Preference.SavingMode)
         {
@@ -121,7 +121,7 @@ public class SettingsFile : ISettingsFile
     /// Remove a KeyValuePair from the list of KeyValuePairs.
     /// </summary>
     /// <param name="pair"></param>
-    public void Remove(KeyValuePair<string, string> pair)
+    public void RemoveValue(KeyValuePair<string, string> pair)
     {
         switch (Preference.SavingMode)
         {
@@ -139,7 +139,7 @@ public class SettingsFile : ISettingsFile
     /// Return an Array of KeyValuePairs.
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, string> Get()
+    public Dictionary<string, string> GetValues()
     {
         return Settings;
     }
@@ -150,7 +150,7 @@ public class SettingsFile : ISettingsFile
     /// <param name="key">The specified Key</param>
     /// <returns></returns>
     /// <exception cref="KeyNotFoundException"></exception>
-    public string Get(string key)
+    public string GetValue(string key)
     {
         foreach (var pair in Settings)
         {
@@ -173,7 +173,7 @@ public class SettingsFile : ISettingsFile
     /// </summary>
     public void SaveFile()
     {
-        SettingsProvider.WriteToFile(Get().ToArray(), FilePath);
+        SettingsProvider.WriteToFile(GetValues().ToArray(), FilePath);
     }
 
     /// <summary>
