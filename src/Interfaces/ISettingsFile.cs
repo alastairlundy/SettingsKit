@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 using System.Collections.Generic;
+
 using LocalizationKit.Interfaces;
 
 namespace SettingsKit;
