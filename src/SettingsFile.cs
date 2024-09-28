@@ -26,11 +26,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Timers;
 
 using LocalizationKit.Interfaces;
-
-using SettingsKit.Enums;
 
 namespace SettingsKit;
 
@@ -44,12 +41,6 @@ public class SettingsFile : ISettingsFile
     public ILocalizationFileProvider SettingsProvider { get; protected set; }
     
     public string FilePath { get; protected set; }
-
-
-    protected System.Timers.Timer timer;
-    
-    public SavePreference Preference { get; protected set; }
-
     
     /// <summary>
     /// 
@@ -60,43 +51,6 @@ public class SettingsFile : ISettingsFile
     {
         FilePath = filePath;
         SettingsProvider = provider;
-        timer = new Timer();
-        Settings = new Dictionary<string, string>();
-        Preference = new SavePreference();
-        Preference.SavingMode = SettingsSavingMode.SaveManuallyOnly;
-
-        timer.Enabled = false;
-    }
-    
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="filePath">The file path to use for Saving the Settings File.</param>
-    /// <param name="provider">The Settings Provider to use.</param>
-    /// <param name="autoSavePreference">The AutoSave preference to use.</param>
-    public SettingsFile(string filePath, ILocalizationFileProvider provider, SavePreference autoSavePreference)
-    {
-        FilePath = filePath;
-        SettingsProvider = provider;
-        
-        timer = new Timer();
-        Settings = new Dictionary<string, string>();
-        Preference = autoSavePreference;
-
-        if (Preference.SavingMode == SettingsSavingMode.AutoSaveAfterTimeMinutes)
-        {
-            timer.Enabled = true;
-            timer.Interval = (Preference.AutoSaveFrequencyMinutes * 60) * 1000;
-            timer.Start();
-            
-            timer.Elapsed += TimerOnElapsed;
-        }
-    }
-
-    private void TimerOnElapsed(object? sender, ElapsedEventArgs e)
-    {
-        SaveFile();
     }
 
     /// <summary>
@@ -105,16 +59,7 @@ public class SettingsFile : ISettingsFile
     /// <param name="pair"></param>
     public void AddValue(KeyValuePair<string, string> pair)
     {
-        switch (Preference.SavingMode)
-        {
-            case SettingsSavingMode.SaveManuallyOnly or SettingsSavingMode.AutoSaveAfterTimeMinutes:
-                Settings.Add(pair.Key, pair.Value);
-                break;
-            case SettingsSavingMode.SaveAfterEveryChange:
-                Settings.Add(pair.Key, pair.Value);
-                SaveFile();
-                break;
-        }
+        Settings.Add(pair.Key, pair.Value);
     }
     
     /// <summary>
@@ -123,16 +68,7 @@ public class SettingsFile : ISettingsFile
     /// <param name="pair"></param>
     public void RemoveValue(KeyValuePair<string, string> pair)
     {
-        switch (Preference.SavingMode)
-        {
-            case SettingsSavingMode.SaveManuallyOnly or SettingsSavingMode.AutoSaveAfterTimeMinutes:
-                Settings.Remove(pair.Key);
-                break;
-            case SettingsSavingMode.SaveAfterEveryChange:
-                Settings.Remove(pair.Key);
-                SaveFile();
-                break;
-        }
+        Settings.Remove(pair.Key);
     }
 
     /// <summary>
