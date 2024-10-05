@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using LocalizationKit.Interfaces;
+using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
 
 namespace SettingsKit;
 
@@ -38,7 +38,7 @@ public class SettingsFile : ISettingsFile
 {
     protected Dictionary<string, string> Settings { get; set; }
     
-    public ILocalizationFileProvider SettingsProvider { get; protected set; }
+    public IKeyValueFileProvider SettingsProvider { get; protected set; }
     
     public string FilePath { get; protected set; }
     
@@ -47,7 +47,7 @@ public class SettingsFile : ISettingsFile
     /// </summary>
     /// <param name="filePath">The file path to use for Saving the Settings File.</param>
     /// <param name="provider">The Settings Provider to use.</param>
-    public SettingsFile(string filePath, ILocalizationFileProvider provider)
+    public SettingsFile(string filePath, IKeyValueFileProvider provider)
     {
         FilePath = filePath;
         SettingsProvider = provider;

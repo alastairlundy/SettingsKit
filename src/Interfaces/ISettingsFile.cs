@@ -24,13 +24,13 @@ SOFTWARE.
 
 using System.Collections.Generic;
 
-using LocalizationKit.Interfaces;
-
+using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
+    
 namespace SettingsKit;
 
 public interface ISettingsFile
 {
-    public ILocalizationFileProvider SettingsProvider { get; }
+    public IKeyValueFileProvider SettingsProvider { get; }
 
     public void AddValue(KeyValuePair<string, string> pair);
 
