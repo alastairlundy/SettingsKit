@@ -1,5 +1,10 @@
 # SettingsKit
+## Note
+SettingsKit is archived and is no longer being maintained. Use Microsoft.Extensions.Configuration instead for managing application settings.
+
+### Original SettingsKit Readme
 Make managing settings in .NET applications easy
+
 
 This library targets .NET 6 and newer .
 
